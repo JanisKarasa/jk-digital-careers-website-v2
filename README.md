@@ -22,6 +22,8 @@ A careers website for JK Digital 📟
 - Creating templates that could be rendered on other templates
 ### API:
 - Adding API Route to Return JSON instead of HTML
+### Cloud:
+- Deploying website to the cloud Render.com
 
 ## Tools Used:
 
