@@ -14,6 +14,11 @@ A careers website for JK Digital 📟
 - Basics of Flask
 ### Bootstrap:
 - Styling with Bootstrap framework
+### Jinja:
+- Inserting Dynamic Data into HTML templates
+- Rendering Dynamic Data using Jinja template tags
+- Looping through the list of dictionaries to present the data in HTML
+- Handling logic of condition if some info is not present in the list of dictionaries
 
 ## Tools Used:
 

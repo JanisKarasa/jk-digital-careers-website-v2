@@ -23,3 +23,22 @@ img {
   object-fit: cover;
   width: 100%;
 }
+
+.jobs__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobs__info {
+  margin-bottom: 16px;
+}
+
+.job__title {
+  color: rgb(120, 120, 120);
+  margin-bottom: 4px;
+}
+
+.job__location, .job__salary {
+  margin: 0;
+}

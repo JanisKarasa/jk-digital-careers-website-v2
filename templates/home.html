@@ -40,7 +40,26 @@
         voluptate.
       </p>
       <h2 class="text-center mt-5 mb-4"">Open Positions</h2>
-      <p>TODO ... Show the jobs here</p>
+
+      <div>
+        <!-- looping through the jobs=JOBS (Dummy DB in app.py) - the list of many dictionaries, putting them in tags and giving them styling-->
+        {% for job in jobs %}
+        <div class="jobs__wrapper">
+          <div class="jobs__info">
+            <h4 class="job__title">{{job.title}}</h4>  
+            <p class="job__location"><b>Location:</b> {{job.location}}</p>
+            <!-- if the salary is not listed for some roles, we are handling with conditional -->
+            {% if job.salary %}
+              <p class="job__salary"><b>Salary:</b> {{job.salary}}</p>
+            {% endif %}
+          </div>
+          <div>
+            <button class="btn btn-primary btn-sm jobs__btn">Apply</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
       <div class="text-center">
         <button class="btn btn-primary btn-lg">Contact Us</button>
         <p class="mt-4">Copyright 2023</p>
