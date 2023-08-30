@@ -1,0 +1,20 @@
+{# Creating a template that lists all jobs that could be rendered on other pages
+as well using 'for' loop. And inside desired template inside the 'for' loop we
+write {% include 'jobitem.html' %}, like in home.html. This is a nice way to
+organize the information across multiple templates #}
+
+<div class="jobs__wrapper">
+  <div class="jobs__info">
+    <h4 class="job__title">{{job.title}}</h4>
+    <p class="job__location"><b>Location:</b> {{job.location}}</p>
+    <!-- if the salary is not listed for some roles, we are handling with conditional -->
+    {% if job.salary %}
+    <p class="job__salary"><b>Salary:</b> {{job.salary}}</p>
+    {% else %}
+    <p class="job__salary"><b>Salary:</b> Undisclosed</p>
+    {% endif %}
+  </div>
+  <div>
+    <button class="btn btn-outline-primary btn-sm">Apply</button>
+  </div>
+</div>

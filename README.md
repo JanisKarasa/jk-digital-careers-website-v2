@@ -19,6 +19,7 @@ A careers website for JK Digital 📟
 - Rendering Dynamic Data using Jinja template tags
 - Looping through the list of dictionaries to present the data in HTML
 - Handling logic of condition if some info is not present in the list of dictionaries
+- Creating templates that could be rendered on other templates
 
 ## Tools Used:
 
