@@ -1,0 +1,25 @@
+/* Reset default settings  */
+*,
+*::before,
+*::after {
+  /* changing how PADDING is calculated to make it within a width instead of adding to the total width of something */
+  box-sizing: border-box;
+}
+
+body {
+  /* background-color: black; */
+  margin: 0;
+  padding: 0;
+}
+
+/* setting up images just so they don't grow bigger and overflow at the side of their parents */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.banner {
+  height: 360px;
+  object-fit: cover;
+  width: 100%;
+}

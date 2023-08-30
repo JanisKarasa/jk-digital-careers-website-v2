@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JK Digital Careers</title>
+    
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+
+    <!-- Our CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
+      <img
+        class="img-fluid banner"
+        src="{{ url_for('static', filename='images/banner.jpg') }}"
+        alt="banner"
+      />
+      <h2 class="text-center mt-5 mb-4"">About JK Digital</h2>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto quas rem
+        odit modi illum! Sequi laborum autem incidunt aliquid, explicabo sunt
+        aliquam voluptate vitae beatae iusto rerum delectus unde blanditiis!
+        Sunt illum officia maxime tempore libero voluptas, nulla magni
+        blanditiis reprehenderit nostrum harum doloremque veniam expedita est
+        vel magnam distinctio amet nihil ea odio soluta eveniet eum velit
+        voluptate.
+      </p>
+      <h2 class="text-center mt-5 mb-4"">Open Positions</h2>
+      <p>TODO ... Show the jobs here</p>
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg">Contact Us</button>
+        <p class="mt-4">Copyright 2023</p>
+      </div>
+    </div>
+  </body>
+</html>
