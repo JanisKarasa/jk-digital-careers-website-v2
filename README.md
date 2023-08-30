@@ -20,6 +20,8 @@ A careers website for JK Digital 📟
 - Looping through the list of dictionaries to present the data in HTML
 - Handling logic of condition if some info is not present in the list of dictionaries
 - Creating templates that could be rendered on other templates
+### API:
+- Adding API Route to Return JSON instead of HTML
 
 ## Tools Used:
 

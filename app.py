@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -38,6 +38,15 @@ def home():
     return render_template("home.html", jobs=JOBS)
 # ... we can send this information into the home.html template by inserting {{jobs}} into HTML
 # it is the way to insert DYNAMIC DATA into your HTML and CSS
+
+# this is a second URL/endpoint that's been added to our server
+@app.route("/api/jobs")
+def list_jobs():
+    return jsonify(JOBS)
+# instead returning HTML we can also return some JSON by using jsonify() function
+# this is other way that some websites allow to access some Dynamic Data by using an API. 
+# It takes any object stored in variable and converts it into JSON object. It could also be coming from Database
+# The general convention is to use the route '@app.route("/api/jobs")' to differentiate this route/endpoint from html pages
 
 if __name__ == "__main__":
     app.run(debug=True)
