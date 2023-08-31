@@ -1,8 +1,8 @@
 ![](./readmeImg/quick-wireframe.png)
 
-# jk-careers-website
+# JK Digital Careers  📟
 
-A careers website for JK Digital 📟
+**Live Preview: [Click Me](https://jk-digital-careers-website.onrender.com/)**
 
 ---
 
@@ -14,6 +14,7 @@ A careers website for JK Digital 📟
 - Basics of Flask
 ### Bootstrap:
 - Styling with Bootstrap framework
+- Adding a Navbar and Footer from Bootstrap
 ### Jinja:
 - Inserting Dynamic Data into HTML templates
 - Rendering Dynamic Data using Jinja template tags
@@ -24,11 +25,16 @@ A careers website for JK Digital 📟
 - Adding API Route to Return JSON instead of HTML
 ### Cloud:
 - Deploying website to the cloud Render.com
+### Mailto:
+- Adding mailto: links for the buttons 'Apply' and 'Contact Us'
+- Constructing email templates and converting them to URLs
 
 ## Tools Used:
 
-1. Drawing Wireframes - [https://excalidraw.com/](https://excalidraw.com/)
-2. Images - [https://unsplash.com/](https://unsplash.com/)
-3. Styling framework - [https://getboostrap.com/](https://getboostrap.com/)
-4. UI Design: Figma
-5. Code Editor: VSCode
+1. Code Editor: VSCode
+2. Drawing Wireframes - [https://excalidraw.com/](https://excalidraw.com/)
+3. Images - [https://unsplash.com/](https://unsplash.com/)
+4. Styling framework - [https://getboostrap.com/](https://getboostrap.com/)
+5. Icons - [https://icons8.com/](https://icons8.com/)
+6. Logo - [https://freelogodesign.org/](https://freelogodesign.org/)
+7. Mailto: Link Generator - [https://mailtolink.me/](https://mailtolink.me/)

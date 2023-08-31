@@ -22,23 +22,37 @@
 
   </head>
   <body>
+    {% include 'nav.html' %}
+    <img
+      class="img-fluid banner"
+      src="{{ url_for('static', filename='images/banner.jpg') }}"
+      alt="banner"
+    />
     <div class="container">
       <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
-      <img
-        class="img-fluid banner"
-        src="{{ url_for('static', filename='images/banner.jpg') }}"
-        alt="banner"
-      />
-      <h2 class="text-center mt-5 mb-4"">About JK Digital</h2>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto quas rem
-        odit modi illum! Sequi laborum autem incidunt aliquid, explicabo sunt
-        aliquam voluptate vitae beatae iusto rerum delectus unde blanditiis!
-        Sunt illum officia maxime tempore libero voluptas, nulla magni
-        blanditiis reprehenderit nostrum harum doloremque veniam expedita est
-        vel magnam distinctio amet nihil ea odio soluta eveniet eum velit
-        voluptate.
-      </p>
+      <div class="row">
+        <!-- col-md-6 takes 6 columns out of 12 on medium devices -->
+        <div class="col-md-6">
+          <p class="lead">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto quas rem
+            odit modi illum! Sequi laborum autem incidunt aliquid, explicabo sunt
+            aliquam voluptate vitae beatae iusto rerum delectus unde blanditiis!
+            Sunt illum officia maxime tempore libero voluptas, nulla magni
+            blanditiis reprehenderit nostrum harum doloremque veniam expedita est
+            vel magnam distinctio amet nihil ea odio soluta eveniet eum velit
+            voluptate.
+          </p>
+        </div>
+        <!-- d-none d-md-block will not show the picture on small devices -->
+        <div class="d-none d-md-block col-md-6">
+          <img
+          class="hero__img"
+          src="{{ url_for('static', filename='images/people-working.jpg') }}"
+          alt="people working"
+        />
+        </div>
+      </div>
+
       <h2 class="text-center mt-5 mb-4"">Open Positions</h2>
 
       <div>
@@ -49,9 +63,9 @@
       </div>
       
       <div class="text-center">
-        <button class="btn btn-primary btn-lg">Contact Us</button>
-        <p class="mt-4">Copyright 2023</p>
+        <a href="mailto:hello@jkdigital.com?subject=Question%20about%20Open%20Positions&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%20%3Center%20your%20question%20here%3E" class="btn btn-primary btn-lg">Contact Us</a>
       </div>
     </div>
+    {% include 'footer.html' %}
   </body>
 </html>

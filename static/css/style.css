@@ -28,6 +28,10 @@ img {
   width: 100%;
 }
 
+.hero__img img {
+  height: 320px;
+}
+
 .jobs__wrapper {
   display: flex;
   justify-content: space-between;
@@ -35,10 +39,6 @@ img {
   padding-bottom: 8px;
   margin-bottom: 16px;
   border-bottom: 1px solid lightgray;
-}
-
-.jobs__wrapper:last-child {
-  border-bottom: none;
 }
 
 .job__title {
