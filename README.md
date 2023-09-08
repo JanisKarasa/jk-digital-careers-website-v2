@@ -4,7 +4,7 @@
 
 This version (v2) includes **MySQL Database** connection on the backend
 
-**Live Preview: [Click Me](https://https://jk-digital-careers-website-v2.onrender.com/)**
+**Live Preview: [Click Me](https://jk-digital-careers-website-v2.onrender.com/)**
 
 ---
 
@@ -28,7 +28,8 @@ This version (v2) includes **MySQL Database** connection on the backend
 ### Cloud:
 - Deploying website to the cloud Render.com
 - Setting up a cloud **MySQL** database on PlanetScale.com
-- Managing sensitive connection credentials as environment variables
+- Managing sensitive connection credentials as environment variables with a Secret File (.env) and python-dotenv library for safe deployment
+- Managing SSL Certificates for safe connection to database
 ### Mailto:
 - Adding mailto: links for the buttons 'Apply' and 'Contact Us'
 - Constructing email templates and converting them to URLs
@@ -40,6 +41,7 @@ This version (v2) includes **MySQL Database** connection on the backend
 - Connecting Web App to database hosted on cloud using **SQLAlchemy** library in Python
 - Retrieving data from a database and converting it to a list of dictionary objects
 - Managing sensitive connection credentials as environment variables with a Secret File (.env) and python-dotenv library for safe deployment
+- Managing SSL Certificates for safe connection to database
 
 ## Tools Used:
 

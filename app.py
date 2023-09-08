@@ -25,4 +25,4 @@ def list_jobs():
 # The general convention is to use the route '@app.route("/api/jobs")' to differentiate this route/endpoint from html pages
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug="True")

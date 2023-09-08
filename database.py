@@ -26,7 +26,7 @@ engine = create_engine(
     connect_args={
         "ssl": {
             # this path we get from PlanetScale's connection (with Python) parameters in main.py tab
-            "ca": "/etc/ssl/cert.pem"
+            "ssl_ca": "/etc/ssl/cert.pem"
         }
     }
 )
