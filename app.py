@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
 # importing 'oad_jobs_from_db' function from database.py
-from database import load_jobs_from_db
+from database import load_jobs_from_db, load_job_from_db
 
 app = Flask(__name__)
 
@@ -23,6 +23,19 @@ def list_jobs():
 # this is other way that some websites allow to access some Dynamic Data by using an API. 
 # It takes any object stored in variable and converts it into JSON object. It could also be coming from Database
 # The general convention is to use the route '@app.route("/api/jobs")' to differentiate this route/endpoint from html pages
+
+# route that will access and display the job description by its id
+# This route handles requests to URLs like "/job/<id>", where "<id>" is a dynamic part of the URL.
+@app.route("/job/<id>")
+def show_job(id):
+    # Call the 'load_job_from_db' function to retrieve a job from the database based on the 'id' provided in the URL.
+    job = load_job_from_db(id)
+    
+    # Convert the 'job' data (a dictionary) into a JSON response using Flask's 'jsonify' function.
+    # This allows you to send the job data as a JSON response to the client.
+    return jsonify(job)
+
+
 
 if __name__ == "__main__":
     app.run(debug="True")

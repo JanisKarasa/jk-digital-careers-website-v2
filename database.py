@@ -47,3 +47,28 @@ def load_jobs_from_db():
             # and converting each row into a dictionary object, and appending to a list making it a list of dictionaries so we can present this data in the website
             jobs.append(row._asdict())
         return jobs
+
+
+# 6. Define a function that takes an 'id' as an argument.
+def load_job_from_db(id):
+    # Open a connection to the database using the 'engine'.
+    with engine.connect() as conn:
+        # Execute an SQL query that selects all columns from the 'jobs' table where 'id' matches the provided value.
+        # The ':val' is a named parameter that will be replaced by the value of 'id'.
+        result = conn.execute(
+            text("SELECT * FROM jobs WHERE id = :val"),
+            {"val": id}  # Use a dictionary to bind the 'id' parameter
+        )
+        
+        # Fetch all rows from the result set and store them in the 'rows' list.
+        rows = result.all() 
+        
+        # Check if there are no rows in the result set (empty result).
+        if len(rows) == 0:
+            # If no rows are found, return None to indicate that no job was found with the given 'id'.
+            return None
+        else:
+            # If rows are found, convert the first row to a dictionary using '_asdict()' method.
+            # This allows you to represent the row as a dictionary where column names are keys.
+            # Return the dictionary representation of the first row.
+            return rows[0]._asdict()
