@@ -30,10 +30,15 @@ def list_jobs():
 def show_job(id):
     # Call the 'load_job_from_db' function to retrieve a job from the database based on the 'id' provided in the URL.
     job = load_job_from_db(id)
-    
-    # Convert the 'job' data (a dictionary) into a JSON response using Flask's 'jsonify' function.
-    # This allows you to send the job data as a JSON response to the client.
-    return jsonify(job)
+
+    # if job is None (as it is returning in load_job_from_db(id)), if the job is not present, instead of showing empty information ...
+    if not job:
+        # ... it returns 'Not Found' and specify your error code
+        return "Not Found", 404
+
+    # instead of returning JSON, we render template and pass the 'job' data to it
+    # This allows you to generate an HTML page that displays the job details
+    return render_template("jobpage.html", job=job)
 
 
 

@@ -9,7 +9,7 @@ organize the information across multiple templates #}
     <p class="job__location"><b>Location:</b> {{job.location}}</p>
     <!-- if the salary is not listed for some roles, we are handling with conditional -->
     {% if job.salary %}
-    <p class="job__salary"><b>Salary:</b> {{job.salary}}</p>
+    <p class="job__salary"><b>Salary:</b> {{job.currency}} {{job.salary}}</p>
     {% else %}
     <p class="job__salary"><b>Salary:</b> Undisclosed</p>
     {% endif %}
