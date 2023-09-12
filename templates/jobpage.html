@@ -11,7 +11,12 @@
     <h3>Location</h3>
     <p>{{job.location}}</p>
     <h4>Salary</h4>
-    <p>{{job.currency}}{{job.salary}}</p>
+    <!-- if the salary is not listed for some roles, we are handling with conditional -->
+    {% if job.salary %}
+    <p class="job__salary">{{job.currency}} {{job.salary}}</p>
+    {% else %}
+    <p class="job__salary">Undisclosed</p>
+    {% endif %}
     <h3>Responsibilities</h3>
     <p>{{job.responsibilities}}</p>
     <h3>Requirements</h3>
