@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 # importing 'oad_jobs_from_db' function from database.py
 from database import load_jobs_from_db, load_job_from_db
 
@@ -40,7 +40,20 @@ def show_job(id):
     # This allows you to generate an HTML page that displays the job details
     return render_template("jobpage.html", job=job)
 
+# Define a route for applying to a job with a specific 'id'.
+# The route construction we get from url bar when we hit submit (form) button. And we use this construction to create a route
+@app.route("/job/<id>/apply")
+def apply_to_job(id):
+    # Retrieve request data passed as query parameters in url bar.
+    data = request.args
 
+    # we can do all sorts of things with this info (data):
+    # store this ‘data’ in DB
+    # store an acknowledgement 
+    # send an email
+
+    # Return the request data as a JSON response.
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug="True")
