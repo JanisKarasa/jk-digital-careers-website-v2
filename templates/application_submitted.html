@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Submitted</title>
+
+    <!-- Bootstrap CSS -->
+    {% include 'bootstrap.html' %}
+
+    <!-- Our CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    {% include 'nav.html' %}
+
+    <!-- BANNER -->
+    {% include 'banner.html' %}
+
+    <div class="container">
+      <!-- HERO Section -->
+      <!-- HERO TITLE -->
+      <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
+
+      <!-- CONFIRMATION -->
+      <p>Your application for the role of <b>{{job.title}}</b> at JK Digital has been submitted.</p>
+
+      <!-- NAME -->
+      <b>Full Name</b>
+      <div class="mb-2">{{application.full_name}}</div>
+
+      <!-- EMAIL -->
+      <b>Email</b>
+      <div class="mb-2">{{application.email}}</div>
+
+      <!-- LINKEDIN URL -->
+      <b>LinkedIn URL</b>
+      <div class="mb-2">{{application.linkedin_url}}</div>
+
+      <!-- EDUCATION -->
+      <b>Education</b>
+      <div class="mb-2">{{application.education}}</div>
+
+      <!-- WORK EXPERIENCE -->
+      <b>Work Experience</b>
+      <div class="mb-2">{{application.work_experience}}</div>
+    </div>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+  </body>
+</html>

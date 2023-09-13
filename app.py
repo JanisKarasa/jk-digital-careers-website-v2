@@ -50,13 +50,17 @@ def apply_to_job(id):
     # When you ‘post’ by submitting a form, the data is present in request.form
     data = request.form
 
+    # load job by its id so we can display name of the job in application_submitted.html / add job=job in render_template(...)
+    job = load_job_from_db(id)
+
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB
     # displayed an acknowledgement 
     # send a confirmation email
 
-    # Return the request data as a JSON response.
-    return jsonify(data)
+    # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'
+    # Additionally, we are passing job description data that we load by its id to use that data in the template too
+    return render_template('application_submitted.html', application=data, job=job)
 
 if __name__ == "__main__":
     app.run(debug="True")
