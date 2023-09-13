@@ -41,16 +41,19 @@ def show_job(id):
     return render_template("jobpage.html", job=job)
 
 # Define a route for applying to a job with a specific 'id'.
-# The route construction we get from url bar when we hit submit (form) button. And we use this construction to create a route
-@app.route("/job/<id>/apply")
+# The route construction we get from url bar when we hit submit (form) button. And we use this construction to create a route.
+# And now the route expects the 'post' method from the form in application_form.html that uses 'post' method,
+# it expects some data to be posted by the browser, and not send in URL bar, to retrieve it with request.form to do all sorts of things with this data
+@app.route("/job/<id>/apply", methods=["post"])
 def apply_to_job(id):
-    # Retrieve request data passed as query parameters in url bar.
-    data = request.args
+    # Retrieve form data submitted via the HTTP POST request.
+    # When you ‘post’ by submitting a form, the data is present in request.form
+    data = request.form
 
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB
-    # store an acknowledgement 
-    # send an email
+    # displayed an acknowledgement 
+    # send a confirmation email
 
     # Return the request data as a JSON response.
     return jsonify(data)
