@@ -1,5 +1,5 @@
 <!-- TITLE of the FORM -->
-<h4>Application Form</h4>
+<h4 class="mt-5">Application Form</h4>
 <form action="/job/{{job.id}}/apply" method="post">
     <!-- Now form data is posted, it is sent by the browser along with the (http post) request to this URL (http://127.0.0.1:5000/job/3/apply),
     to this server, and the server, which is running my Flask app, receives the request. This data is included in the body of the HTTP request.
@@ -8,20 +8,20 @@
   <!-- NAME -->
   <div class="mb-2">
     <label for="">Full Name</label><br />
-    <input type="text" name="full_name" placeholder="Bruce Wayne" />
+    <input type="text" required name="full_name" placeholder="Bruce Wayne" />
   </div>
 
   <!-- EMAIL -->
   <div class="mb-2">
     <label for="">Email</label><br />
-    <input type="text" name="email" placeholder="bruce@wayne.com" />
+    <input type="email" required name="email" placeholder="bruce@wayne.com" />
   </div>
 
   <!-- LinkedIn -->
   <div class="mb-2">
     <label for="">LinkedIn URL</label><br />
     <input
-      type="text"
+      type="url"
       name="linkedin_url"
       placeholder="https://linkedin/in/brucewayne"
     />
@@ -43,7 +43,7 @@
   <div class="mb-2">
     <label for="">Resume URL</label><br />
     <input
-      type="text"
+      type="url"
       name="resume_url"
       placeholder="https://brucewayne.me"
     />
