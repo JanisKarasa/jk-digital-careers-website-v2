@@ -40,6 +40,12 @@ def show_job(id):
     # This allows you to generate an HTML page that displays the job details
     return render_template("jobpage.html", job=job)
 
+# Route that shows individual job listings based on id
+@app.route("/api/job/<id>")
+def show_job_json(id):
+    job = load_job_from_db(id)
+    return jsonify(job)
+
 # Define a route for applying to a job with a specific 'id'.
 # The route construction we get from url bar when we hit submit (form) button. And we use this construction to create a route.
 # And now the route expects the 'post' method from the form in application_form.html that uses 'post' method,
@@ -60,7 +66,7 @@ def apply_to_job(id):
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB (did that)
     # displayed an acknowledgement (did that)
-    # send a confirmation email
+    # send a confirmation email to admin and candidate on application submission (TODO use mailjet.com API)
 
     # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'
     # Additionally, we are passing job description data that we load by its id to use that data in the template too

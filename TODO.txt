@@ -1,0 +1,19 @@
+[ … TODO … ] 
+
+[IMPORTANT]
+include a ‘captcha’ in the application form to prevent spam/bots littering the db (use hcaptcha.com API), 
+send a confirmation email to admin and candidate on application submission (use mailjet.com API)
+
+[VERY IMPORTANT FOR FULL-FLEDGE WEBSITE]
+and then in terms of even going beyond and sort of making this a full-fledged website:
+1. you can create an admin login interface, so that we don't have to directly interact with the database, 
+admins can log in and, check submitted applications, 
+admins can add jobs, 
+admins can delete jobs, 
+2. admins can mark applications as accepted or rejected 
+3. and users can also maybe login to check their application status,
+
+Additionally:
+# create a function in database.py that loads all applications, and use it to create an API (@app.route("/api/applications")) in app.py to show all applications in JSON format
+# create a function in database.py that loads particular application based on id, and use it to create an API (@app.route("/api/application/<id>")) in app.py which can return data for a particular application in JSON format
+# or you can also have an API to just get the applications for a specific job, 

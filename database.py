@@ -89,3 +89,8 @@ def add_application_to_db(job_id, application):
                       "education": application["education"],
                       "work_experience": application["work_experience"],
                       "resume_url": application["resume_url"]})
+        
+# TODO:
+# create a function in database.py that loads all applications, and use it to create an API (@app.route("/api/applications")) in app.py to show all applications in JSON format
+# create a function in database.py that loads particular application based on id, and use it to create an API (@app.route("/api/application/<id>")) in app.py which can return data for a particular application in JSON format
+# or you can also have an API to just get the applications for a specific job, 
