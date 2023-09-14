@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 # importing 'oad_jobs_from_db' function from database.py
-from database import load_jobs_from_db, load_job_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 
 app = Flask(__name__)
 
@@ -53,9 +53,13 @@ def apply_to_job(id):
     # load job by its id so we can display name of the job in application_submitted.html / add job=job in render_template(...)
     job = load_job_from_db(id)
 
+    # call this function to populate/insert the data from form/application (data = request.form) into db,
+    # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
+    add_application_to_db(id, data)
+
     # we can do all sorts of things with this info (data):
-    # store this ‘data’ in DB
-    # displayed an acknowledgement 
+    # store this ‘data’ in DB (did that)
+    # displayed an acknowledgement (did that)
     # send a confirmation email
 
     # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'

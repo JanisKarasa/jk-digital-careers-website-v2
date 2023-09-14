@@ -31,7 +31,7 @@ engine = create_engine(
     }
 )
 
-# 5. defining function where we connecting with database, getting data, converting and appending in a list of dictionary objects and returning a list
+# 5. Defining a function where we connecting with database, getting all data from jobs table, converting and appending in a list of dictionary objects and returning a list
 def load_jobs_from_db():
     # 3. getting DB data out of the 'engine' by connecting to it, import our 'engine' module from database.py
     # setting up a connection with engine and giving it a name 'conn', 'with' will close a connection automatically after we finish
@@ -72,3 +72,20 @@ def load_job_from_db(id):
             # This allows you to represent the row as a dictionary where column names are keys.
             # Return the dictionary representation of the first row.
             return rows[0]._asdict()
+
+#7. Defining a function where we connecting with database to insert the data in db from application forms based on job id
+def add_application_to_db(job_id, application):
+    # Establish a connection to the database using the 'engine' object.
+    with engine.connect() as conn:
+        # Define an SQL query using SQLAlchemy's 'text' function to insert data into the 'applications' table.
+        query = text( "INSERT INTO applications (job_id, full_name, email, linkedin_url, education, work_experience, resume_url) VALUES (:job_id, :full_name, :email, :linkedin_url, :education, :work_experience, :resume_url)")
+        
+        # Execute the SQL query by passing a dictionary of parameter values.
+        conn.execute(query, 
+                     {"job_id": job_id,
+                      "full_name": application["full_name"],
+                      "email": application["email"],
+                      "linkedin_url": application["linkedin_url"],
+                      "education": application["education"],
+                      "work_experience": application["work_experience"],
+                      "resume_url": application["resume_url"]})
