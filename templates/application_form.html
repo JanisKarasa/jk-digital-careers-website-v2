@@ -1,10 +1,10 @@
 <!-- TITLE of the FORM -->
 <h4 class="mt-5">Application Form</h4>
 <form action="/job/{{job.id}}/apply" method="post">
-    <!-- Now form data is posted, it is sent by the browser along with the (http post) request to this URL (http://127.0.0.1:5000/job/3/apply),
+  <!-- Now form data is posted, it is sent by the browser along with the (http post) request to this URL (http://127.0.0.1:5000/job/3/apply),
     to this server, and the server, which is running my Flask app, receives the request. This data is included in the body of the HTTP request.
     And now that data is accessed/retrieved using request.form in (‘/job/<id>/apply’, method=[post]) route in app.py to do all sorts of things ... -->
-    
+
   <!-- NAME -->
   <div class="mb-2">
     <label for="">Full Name</label><br />
@@ -42,12 +42,11 @@
   <!-- RESUME URL -->
   <div class="mb-2">
     <label for="">Resume URL</label><br />
-    <input
-      type="url"
-      name="resume_url"
-      placeholder="https://brucewayne.me"
-    />
+    <input type="url" name="resume_url" placeholder="https://brucewayne.me" />
   </div>
+
+  <!-- hCAPTCHA -->
+  {{ hcaptcha }}
 
   <!-- SUBMIT BUTTON -->
   <input type="submit" />
@@ -56,7 +55,6 @@
     When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->
 </form>
 
- 
 <!-- TODO: 
 some formatting, maybe a form in separate page
 include a ‘captcha’ in the application form to prevent spam/bots littering the db db (use hcaptcha.com API)

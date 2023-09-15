@@ -27,8 +27,23 @@
       <!-- HERO TITLE -->
       <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
 
+      <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div>
+        <ul>
+          {% for category, message in messages %}
+          <li class="alert alert-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %} {% endwith %}
+
       <!-- CONFIRMATION -->
-      <p>Your application for the role of <b>{{job.title}}</b> at JK Digital has been submitted.</p>
+      <p>
+        Your application for the role of <b>{{job.title}}</b> at JK Digital has
+        been submitted.
+      </p>
 
       <!-- NAME -->
       <b>Full Name</b>

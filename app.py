@@ -1,8 +1,33 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash
 # importing 'oad_jobs_from_db' function from database.py
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 
+# importing hCaptcha extension
+from flask_hcaptcha import hCaptcha
+
+# import 'os' module to access the environment variables in .env file to use hCaptcha's environment variables
+import os
+# import load_dotenv module to fetch environment variables for hCaptcha
+from dotenv import load_dotenv
+# take environment variables from .env
+load_dotenv()
+
 app = Flask(__name__)
+# In case of hCaptha, a secret key for an app needs to be set to ensure the security of sessions, user authentication, and other features that rely on secure cookies. 
+app.secret_key = os.getenv('APP_SECRET_KEY')
+
+
+# set the HCAPTCHA_SITE_KEY and HCAPTCHA_SECRET_KEY configuration variables with the values from my hCaptcha account.
+# HCAPTCHA_SITE_KEY = os.getenv('HCAPTCHA_SITE_KEY')
+# HCAPTCHA_SECRET_KEY = os.getenv('HCAPTCHA_SECRET_KEY')
+
+app.config['HCAPTCHA_SITE_KEY'] = os.getenv('HCAPTCHA_SITE_KEY')
+app.config['HCAPTCHA_SECRET_KEY'] = os.getenv('HCAPTCHA_SECRET_KEY')
+
+
+hcaptcha = hCaptcha()
+hcaptcha.init_app(app)
+
 
 
 @app.route("/")
@@ -59,18 +84,30 @@ def apply_to_job(id):
     # load job by its id so we can display name of the job in application_submitted.html / add job=job in render_template(...)
     job = load_job_from_db(id)
 
-    # call this function to populate/insert the data from form/application (data = request.form) into db,
-    # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
-    add_application_to_db(id, data)
+
+    # hCAPTCHA's logic
+
+    if hcaptcha.verify():
+        # hCaptcha verification passed
+        # call this function to populate/insert the data from form/application (data = request.form) into db,
+        # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
+        add_application_to_db(id, data)
+        flash('hCaptcha verification passed', 'success')
+        # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'
+        # Additionally, we are passing job description data that we load by its id to use that data in the template too
+        return render_template('application_submitted.html', application=data, job=job)
+
+    else:
+        # hCaptcha verification failed
+        flash('hCaptcha verification failed. Please try again', 'danger')
+        return render_template('application_submitted.html', application=data, job=job) 
+
 
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB (did that)
     # displayed an acknowledgement (did that)
     # send a confirmation email to admin and candidate on application submission (TODO use mailjet.com API)
 
-    # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'
-    # Additionally, we are passing job description data that we load by its id to use that data in the template too
-    return render_template('application_submitted.html', application=data, job=job)
 
 if __name__ == "__main__":
-    app.run(debug="True")
+    app.run(debug=True)
