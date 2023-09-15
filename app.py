@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, flash
 # importing 'oad_jobs_from_db' function from database.py
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db
 
 # importing hCaptcha extension
 from flask_hcaptcha import hCaptcha
@@ -107,6 +107,18 @@ def apply_to_job(id):
     # store this ‘data’ in DB (did that)
     # displayed an acknowledgement (did that)
     # send a confirmation email to admin and candidate on application submission (TODO use mailjet.com API)
+
+# an API route that returns all the applications in JSON
+@app.route("/api/apps")
+def show_applications_json():
+    apps = load_applications_from_db()
+    return jsonify(apps)
+
+# an API route that returns applications for a specific job
+@app.route("/api/apps_by_job/<job_id>")
+def show_application_by_job_json(job_id):
+    apps_by_job = load_application_from_db(job_id)
+    return jsonify(apps_by_job)
 
 
 if __name__ == "__main__":

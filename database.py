@@ -90,7 +90,47 @@ def add_application_to_db(job_id, application):
                       "work_experience": application["work_experience"],
                       "resume_url": application["resume_url"]})
         
+# 8. Load all applications from db
+def load_applications_from_db():
+    with engine.connect() as conn:
+         
+        result = conn.execute(text("SELECT * FROM applications"))
+         
+        applications = []
+
+        rows = result.all()
+
+        for row in rows:
+             applications.append(row._asdict())
+        return applications
+
+# 9. Load an individual application for a specific job 
+def load_application_from_db(job_id):
+    # Open a connection to the database using the 'engine'.
+    with engine.connect() as conn:
+        # Execute an SQL query that selects all columns from the 'jobs' table where 'id' matches the provided value.
+        # The ':val' is a named parameter that will be replaced by the value of 'id'.
+        result = conn.execute(
+            text("SELECT * FROM applications WHERE job_id = :val"),
+            {"val": job_id}  # Use a dictionary to bind the 'id' parameter
+        )
+        
+        # Fetch all rows from the result set and store them in the 'rows' list.
+        rows = result.all() 
+        
+        # Check if there are no rows in the result set (empty result).
+        if len(rows) == 0:
+            # If no rows are found, return None to indicate that no job was found with the given 'id'.
+            return None
+        else:
+            applications = []
+
+            for row in rows:
+                applications.append(row._asdict())
+            return applications
+
+
 # TODO:
 # create a function in database.py that loads all applications, and use it to create an API (@app.route("/api/applications")) in app.py to show all applications in JSON format
 # create a function in database.py that loads particular application based on id, and use it to create an API (@app.route("/api/application/<id>")) in app.py which can return data for a particular application in JSON format
-# or you can also have an API to just get the applications for a specific job, 
+# or you can also have an API to just get the applications for a specific job (job_id), 
