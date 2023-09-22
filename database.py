@@ -1,4 +1,4 @@
-# here we write some code to connect to the database and extract some data from it by using SQLAlchemy library - DB Toolkit for Python...
+# here we write some code to connect to the database using SQLAlchemy library - DB Toolkit for Python...
 # recourses - https://docs.sqlalchemy.org/
 
 # 1. first install - 'pip install sqlalchemy' then import necessary modules that will be needed writing the code ...
@@ -93,15 +93,16 @@ def add_application_to_db(job_id, application):
 # 8. Load all applications from db
 def load_applications_from_db():
     with engine.connect() as conn:
-         
+        # Execute an SQL query that selects all columns from the 'applications' table
         result = conn.execute(text("SELECT * FROM applications"))
-         
+        # creating an empty list where we will store all rows of DB 'applications' table as dictionary objects
         applications = []
-
+        # Fetch all rows from the result set and store them in the 'rows' list.
         rows = result.all()
-
+        # iterating through the list of rows 
         for row in rows:
-             applications.append(row._asdict())
+            # and converting each row into a dictionary object, and appending to a list making it a list of dictionaries so we can present this data in the website
+            applications.append(row._asdict())
         return applications
 
 # 9. Load an individual application for a specific job 
@@ -128,9 +129,3 @@ def load_application_from_db(job_id):
             for row in rows:
                 applications.append(row._asdict())
             return applications
-
-
-# TODO:
-# create a function in database.py that loads all applications, and use it to create an API (@app.route("/api/applications")) in app.py to show all applications in JSON format
-# create a function in database.py that loads particular application based on id, and use it to create an API (@app.route("/api/application/<id>")) in app.py which can return data for a particular application in JSON format
-# or you can also have an API to just get the applications for a specific job (job_id), 

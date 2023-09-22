@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, flash
-# importing 'oad_jobs_from_db' function from database.py
+# importing all function from database.py that's going to be used in our routes
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db
 
 # importing hCaptcha extension
@@ -13,44 +13,36 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-# In case of hCaptha, a secret key for an app needs to be set to ensure the security of sessions, user authentication, and other features that rely on secure cookies. 
+# In case of hCaptcha, a secret key for an app needs to be set to ensure the security of sessions, user authentication, and other features that rely on secure cookies. 
 app.secret_key = os.getenv('APP_SECRET_KEY')
 
-
 # set the HCAPTCHA_SITE_KEY and HCAPTCHA_SECRET_KEY configuration variables with the values from my hCaptcha account.
-# HCAPTCHA_SITE_KEY = os.getenv('HCAPTCHA_SITE_KEY')
-# HCAPTCHA_SECRET_KEY = os.getenv('HCAPTCHA_SECRET_KEY')
-
 app.config['HCAPTCHA_SITE_KEY'] = os.getenv('HCAPTCHA_SITE_KEY')
 app.config['HCAPTCHA_SECRET_KEY'] = os.getenv('HCAPTCHA_SECRET_KEY')
 
-
+# implementation of hCaptcha
 hcaptcha = hCaptcha()
 hcaptcha.init_app(app)
+# then inside of the form you want to protect, include the tag: {{ hcaptcha }}. It will insert the code automatically
 
-
-
+# Defining a route that loads job data from the database and renders an HTML template with the data.
 @app.route("/")
 def home():
     # loading fetched DB data as a list of dictionaries into variable 'jobs'
     jobs = load_jobs_from_db()
     # by providing argument 'jobs' and passing the value 'jobs' - the list of dictionaries ...
     return render_template("home.html", jobs=jobs)
-# ... we can pass fetched DB data into the home.html template by inserting {{jobs}} into HTML
-# it is the way to insert DYNAMIC DATA into your HTML and CSS
+# ... we can pass fetched DB data into the home.html template by inserting {{jobs}} into HTML, it is the way to insert DYNAMIC DATA into your HTML and CSS
 
-# this is a second URL/endpoint that's been added to our server as an API
+# Defining an API route that returns all job data in JSON format.
 @app.route("/api/jobs")
 def list_jobs():
     jobs = load_jobs_from_db()
     return jsonify(jobs)
 # instead returning HTML we can also return some JSON by using jsonify() function
-# this is other way that some websites allow to access some Dynamic Data by using an API. 
-# It takes any object stored in variable and converts it into JSON object. It could also be coming from Database
 # The general convention is to use the route '@app.route("/api/jobs")' to differentiate this route/endpoint from html pages
 
-# route that will access and display the job description by its id
-# This route handles requests to URLs like "/job/<id>", where "<id>" is a dynamic part of the URL.
+# Defining a route that displays the details of a specific job based on its ID
 @app.route("/job/<id>")
 def show_job(id):
     # Call the 'load_job_from_db' function to retrieve a job from the database based on the 'id' provided in the URL.
@@ -58,22 +50,21 @@ def show_job(id):
 
     # if job is None (as it is returning in load_job_from_db(id)), if the job is not present, instead of showing empty information ...
     if not job:
-        # ... it returns 'Not Found' and specify your error code
+        # ... it returns 'Not Found' and specify an error code
         return "Not Found", 404
 
-    # instead of returning JSON, we render template and pass the 'job' data to it
-    # This allows you to generate an HTML page that displays the job details
+    # instead of returning JSON, we render template and pass the 'job' data to it allowing to generate an HTML page that displays the job details
     return render_template("jobpage.html", job=job)
 
-# Route that shows individual job listings based on id
+# Defining an API route that returns individual job details in JSON format.
 @app.route("/api/job/<id>")
 def show_job_json(id):
     job = load_job_from_db(id)
     return jsonify(job)
 
-# Define a route for applying to a job with a specific 'id'.
-# The route construction we get from url bar when we hit submit (form) button. And we use this construction to create a route.
-# And now the route expects the 'post' method from the form in application_form.html that uses 'post' method,
+# Defining a route for submitting job applications based on their ID. It handles form data, performs hCaptcha verification, and inserts application data into the database.
+# The route construction we get from url we created in application_form.html form element as an 'action' attribute (<form action="/job/{{job.id}}/apply">)
+# Route expects the 'post' method from the form in application_form.html that uses 'post' method to send a request with the form data to a server,
 # it expects some data to be posted by the browser, and not send in URL bar, to retrieve it with request.form to do all sorts of things with this data
 @app.route("/job/<id>/apply", methods=["post"])
 def apply_to_job(id):
@@ -84,16 +75,15 @@ def apply_to_job(id):
     # load job by its id so we can display name of the job in application_submitted.html / add job=job in render_template(...)
     job = load_job_from_db(id)
 
-
-    # hCAPTCHA's logic
+    # hCAPTCHA's verification logic
 
     if hcaptcha.verify():
         # hCaptcha verification passed
-        # call this function to populate/insert the data from form/application (data = request.form) into db,
+        # call this function to populate/insert the data from the form/application (data = request.form) into db,
         # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
         add_application_to_db(id, data)
         flash('hCaptcha verification passed', 'success')
-        # Instead of returning JSON, we render a template where the form data (as a dictionary) is passed with the name 'application'
+        # Rendering a template where the form data (as a dictionary) is passed with the name 'application'
         # Additionally, we are passing job description data that we load by its id to use that data in the template too
         return render_template('application_submitted.html', application=data, job=job)
 
@@ -101,7 +91,6 @@ def apply_to_job(id):
         # hCaptcha verification failed
         flash('hCaptcha verification failed. Please try again', 'danger')
         return render_template('application_submitted.html', application=data, job=job) 
-
 
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB (did that)

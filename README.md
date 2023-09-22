@@ -4,7 +4,7 @@
 
 This version (v2) includes **MySQL Database** connection on the backend
 
-**Live Preview: [Click Me](https://jk-digital-careers-website-v2.onrender.com/)**
+**Live Preview: [Click Me](https://jk-digital-careers-website-v2.onrender.com/)** *Please allow some time for the website to load.*
 
 ---
 
