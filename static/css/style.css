@@ -28,6 +28,10 @@ img {
   width: 100%;
 }
 
+/* .about_hero_img {
+  max-width: 400px;
+} */
+
 .hero__img img {
   height: 320px;
 }

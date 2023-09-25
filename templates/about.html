@@ -9,20 +9,35 @@ block content %}
   <div class="row">
     <!-- col-md-6 takes 6 columns out of 12 on medium devices -->
     <div class="col-md-6">
-      <p class="lead">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto quas rem
-        odit modi illum! Sequi laborum autem incidunt aliquid, explicabo sunt
-        aliquam voluptate vitae beatae iusto rerum delectus unde blanditiis!
-        Sunt illum officia maxime tempore libero voluptas, nulla magni
-        blanditiis reprehenderit nostrum harum doloremque veniam expedita est
-        vel magnam distinctio amet nihil ea odio soluta eveniet eum velit
-        voluptate.
+      <p>
+        This project prioritizes functionality over style and design, with the
+        latter to be addressed in subsequent phases. The primary focus here is
+        to develop a web application connected to a database, with the main
+        purpose of presenting dynamic data retrieved from the database. The
+        application is currently deployed and hosted on Render.com, while the
+        database is hosted on the PlanetScale platform.
       </p>
+      <p>
+        This project aligns perfectly with my current career goals, as I aim to
+        transition into the IT field, specifically pursuing a career as a
+        web/front-end developer. Working on this project has been both
+        educational and enjoyable, as I've encountered numerous challenges and
+        opportunities for learning. Even though the project is ongoing, it has
+        already provided me with valuable insights and skills that I look
+        forward to further refining."
+      </p>
+      <div class="d-none d-md-block">
+        <img
+          class="hero__img"
+          src="{{ url_for('static', filename='images/database.png') }}"
+          alt="wireframe"
+        />
+      </div>
     </div>
 
     <!-- HERO IMAGE -->
     <!-- d-none d-md-block will not show the picture on small devices -->
-    <div class="d-none d-md-block col-md-6">
+    <div class="d-none d-md-block col-md-6 about_hero_img">
       <img
         class="hero__img"
         src="{{ url_for('static', filename='images/quick-wireframe-1.png') }}"
@@ -30,6 +45,93 @@ block content %}
       />
     </div>
   </div>
+
+  <p class="mt-5"><strong>What I Learned:</strong></p>
+  <ul>
+    <li>
+      <strong>Flask:</strong> I gained a solid understanding of the fundamentals
+      of Flask, a popular Python web framework.
+    </li>
+    <li>
+      <strong>Bootstrap:</strong> I became proficient in using Bootstrap for
+      styling, including creating visually appealing navigation bars and
+      footers.
+    </li>
+    <li>
+      <strong>Jinja:</strong> I learned how to leverage Jinja template tags to
+      inject dynamic data into HTML templates, loop through dictionaries, and
+      handle conditional logic effectively.
+    </li>
+    <li>
+      <strong>API:</strong> I successfully implemented an API route to provide
+      JSON data.
+    </li>
+    <li>
+      <strong>Cloud:</strong> The project involved deploying my website to
+      Render.com and setting up a cloud-based MySQL database on PlanetScale.com.
+      I also learned how to manage sensitive connection credentials and SSL
+      certificates to ensure secure database access.
+    </li>
+    <li>
+      <strong>Mailto:</strong> I integrated mailto: links for 'Apply' and
+      'Contact Us' buttons, constructing email templates and converting them
+      into clickable URLs.
+    </li>
+    <li>
+      <strong>SQL:</strong> My experience with SQL included creating tables,
+      inserting data, connecting my web app to the database using SQLAlchemy,
+      and securely managing sensitive connection credentials.
+    </li>
+  </ul>
+
+  <p><strong>Challenges Faced:</strong></p>
+  <ul>
+    <li>
+      <strong>Database Management:</strong> Setting up and managing a
+      cloud-based MySQL database, along with securely handling sensitive
+      connection credentials, posed a significant challenge.
+    </li>
+    <li>
+      <strong>SSL Certificates:</strong> Managing SSL certificates to establish
+      secure database connections added complexity to the project.
+    </li>
+    <li>
+      <strong>API Integration:</strong> Implementing an API route and
+      understanding the intricacies of API integration required a solid grasp of
+      API concepts.
+    </li>
+    <li>
+      <strong>Dynamic Data Handling:</strong> Effectively managing dynamic data,
+      including iterating through dictionaries and handling conditional logic,
+      presented its own set of challenges.
+    </li>
+    <li>
+      <strong>Deployment:</strong> Deploying the web app to Render.com and
+      ensuring its functionality in a live environment demanded meticulous
+      attention to detail.
+    </li>
+    <li>
+      <strong>Email Integration:</strong> Constructing mailto: links and email
+      templates for 'Apply' and 'Contact Us' buttons involved a deeper
+      understanding of email integration.
+    </li>
+  </ul>
+
+  <p>
+    In conclusion, this project provided me with invaluable hands-on experience
+    in web development using Python, Flask, and database-driven web
+    applications. It also exposed me to a variety of tools and services crucial
+    for modern web development.
+  </p>
+
+  <strong>Future Plans:</strong> In near future (from 25/09/2022) I plan to
+  enhance this application by adding an admin section. In this admin section,
+  administrators will have the capability to create, update, and delete job
+  postings, as well as manage job applications by marking them as accepted or
+  rejected. Furthermore, I intend to implement a feature that allows the
+  uploading of files in formats such as xlsx and csv, facilitating the addition
+  of multiple job ads to the database. Eventually, my goal is to transform this
+  project into a JavaScript + ReactJS-based application.
 
   <div class="text-center mt-5">
     <a
