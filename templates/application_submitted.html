@@ -1,76 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Application Submitted</title>
+{% extends "base.html" %} {% block title %}Application Submitted{% endblock %}
+{% block content %}
 
-    <!-- Bootstrap CSS -->
-    {% include 'bootstrap.html' %}
+<div class="container">
+  <!-- HERO Section -->
+  <!-- HERO TITLE -->
+  <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
 
-    <!-- Our CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    <!-- NAVIGATION -->
-    {% include 'nav.html' %}
+  <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %}
+  <div>
+    <ul>
+      {% for category, message in messages %}
+      <li class="alert alert-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %} {% endwith %}
 
-    <!-- BANNER -->
-    {% include 'banner.html' %}
+  <!-- CONFIRMATION -->
+  <p>
+    Your application for the role of <b>{{job.title}}</b> at JK Digital has been
+    submitted.
+  </p>
 
-    <div class="container">
-      <!-- HERO Section -->
-      <!-- HERO TITLE -->
-      <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
+  <!-- NAME -->
+  <b>Full Name</b>
+  <div class="mb-2">{{application.full_name}}</div>
 
-      <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %}
-      <div>
-        <ul>
-          {% for category, message in messages %}
-          <li class="alert alert-{{ category }}">{{ message }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %} {% endwith %}
+  <!-- EMAIL -->
+  <b>Email</b>
+  <div class="mb-2">{{application.email}}</div>
 
-      <!-- CONFIRMATION -->
-      <p>
-        Your application for the role of <b>{{job.title}}</b> at JK Digital has
-        been submitted.
-      </p>
+  <!-- LINKEDIN URL -->
+  <b>LinkedIn URL</b>
+  <div class="mb-2">{{application.linkedin_url}}</div>
 
-      <!-- NAME -->
-      <b>Full Name</b>
-      <div class="mb-2">{{application.full_name}}</div>
+  <!-- EDUCATION -->
+  <b>Education</b>
+  <div class="mb-2">{{application.education}}</div>
 
-      <!-- EMAIL -->
-      <b>Email</b>
-      <div class="mb-2">{{application.email}}</div>
+  <!-- WORK EXPERIENCE -->
+  <b>Work Experience</b>
+  <div class="mb-2">{{application.work_experience}}</div>
 
-      <!-- LINKEDIN URL -->
-      <b>LinkedIn URL</b>
-      <div class="mb-2">{{application.linkedin_url}}</div>
+  <!-- RESUME URL -->
+  <b>Resume URL</b>
+  <div class="mb-2">{{application.work_experience}}</div>
+</div>
 
-      <!-- EDUCATION -->
-      <b>Education</b>
-      <div class="mb-2">{{application.education}}</div>
-
-      <!-- WORK EXPERIENCE -->
-      <b>Work Experience</b>
-      <div class="mb-2">{{application.work_experience}}</div>
-
-      <!-- RESUME URL -->
-      <b>Resume URL</b>
-      <div class="mb-2">{{application.work_experience}}</div>
-    </div>
-
-    <!-- FOOTER -->
-    {% include 'footer.html' %}
-  </body>
-</html>
+{% endblock %}

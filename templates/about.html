@@ -4,7 +4,7 @@ block content %}
 <div class="container">
   <!-- HERO Section -->
   <!-- HERO TITLE -->
-  <h1 class="text-center mt-5 mb-4">JK Digital Careers</h1>
+  <h1 class="text-center mt-5 mb-4">About this Project</h1>
   <!-- HERO INFORMATION -->
   <div class="row">
     <!-- col-md-6 takes 6 columns out of 12 on medium devices -->
@@ -25,25 +25,17 @@ block content %}
     <div class="d-none d-md-block col-md-6">
       <img
         class="hero__img"
-        src="{{ url_for('static', filename='images/people-working.jpg') }}"
-        alt="people working"
+        src="{{ url_for('static', filename='images/quick-wireframe-1.png') }}"
+        alt="wireframe"
       />
     </div>
   </div>
 
-  <!-- OPEN POSITIONS -->
-  <h2 class="text-center mt-5 mb-4">Open Positions</h2>
-
-  <div>
-    <!-- looping through the jobs=JOBS (Dummy DB in app.py) - the list of many dictionaries, putting them in tags and giving them styling-->
-    {% for job in jobs %} {% include 'jobitem.html' %} {% endfor %}
-  </div>
-
-  <div class="text-center">
+  <div class="text-center mt-5">
     <a
-      href="mailto:hello@jkdigital.com?subject=Question%20about%20Open%20Positions&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%20%3Center%20your%20question%20here%3E"
+      href="https://github.com/JanisKarasa/jk-digital-careers-website-v2"
       class="btn btn-primary btn-lg"
-      >Contact Us</a
+      >Link to Code</a
     >
   </div>
 </div>

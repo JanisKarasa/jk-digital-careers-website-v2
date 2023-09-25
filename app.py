@@ -25,6 +25,11 @@ hcaptcha = hCaptcha()
 hcaptcha.init_app(app)
 # then inside of the form you want to protect, include the tag: {{ hcaptcha }}. It will insert the code automatically
 
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 # Defining a route that loads job data from the database and renders an HTML template with the data.
 @app.route("/")
 def home():
