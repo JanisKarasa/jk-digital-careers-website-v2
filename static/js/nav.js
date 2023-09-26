@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // homeLink.classList.remove("active");
     // adminLink.classList.remove("active");
     aboutLink.setAttribute("aria-current", "true");
-  } else if (currentPage.includes("")) {
+  } else if (currentPage === "/" || currentPage === "") {
     homeLink.classList.add("active");
     // aboutLink.classList.remove("active");
     // adminLink.classList.remove("active");
     homeLink.setAttribute("aria-current", "true");
-  } else if (currentPage.includes("admin")) {
+  } else if (currentPage.includes("/admin")) {
     adminLink.classList.add("active");
     // aboutLink.classList.remove("active");
     // homeLink.classList.remove("active");

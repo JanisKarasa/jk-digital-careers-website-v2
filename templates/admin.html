@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Admin{% endblock %} {% block content
+%}
+
+<h1 class="text-center mt-5 mb-4">Manage Job Listings</h1>
+
+<div class="container">
+  {% for job in jobs %}
+  <div class="jobs__wrapper">
+    <!-- looping through the jobs=JOBS - the list of many dictionaries, putting them in tags and giving them styling-->
+    <div class="jobs__info">
+      <h4 class="job__title">{{job.title}}</h4>
+      <p class="job__location"><b>Location:</b> {{job.location}}</p>
+      <!-- if the salary is not listed for some roles, we are handling with conditional -->
+      {% if job.salary %}
+      <p class="job__salary"><b>Salary:</b> {{job.currency}} {{job.salary}}</p>
+      {% else %}
+      <p class="job__salary"><b>Salary:</b> Undisclosed</p>
+      {% endif %}
+    </div>
+    <div class="button__wrapper">
+      <!-- Linking the button to application form of the specific job -->
+      <a href="/api/job/{{job.id}}" class="btn btn-outline-primary btn-sm"
+        >View</a
+      >
+      <button type="button" class="btn btn-warning btn-sm">Update</button>
+      <button type="button" class="btn btn-danger btn-sm">Delete</button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

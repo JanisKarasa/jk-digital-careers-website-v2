@@ -39,6 +39,11 @@ def home():
     return render_template("home.html", jobs=jobs)
 # ... we can pass fetched DB data into the home.html template by inserting {{jobs}} into HTML, it is the way to insert DYNAMIC DATA into your HTML and CSS
 
+@app.route("/admin")
+def admin():
+    jobs = load_jobs_from_db()
+    return render_template("admin.html", jobs=jobs)
+
 # Defining an API route that returns all job data in JSON format.
 @app.route("/api/jobs")
 def list_jobs():

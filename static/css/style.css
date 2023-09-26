@@ -6,10 +6,14 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  /* background-color: black; */
   margin: 0;
   padding: 0;
+  height: 100%;
+  /* we flex here to push the footer down the bottom in case there is not a lot of content in the body with content class */
+  display: flex;
+  flex-direction: column;
 }
 
 /* setting up images just so they don't grow bigger and overflow at the side of their parents */
@@ -22,15 +26,16 @@ img {
   text-align: justify;
 }
 
+/* class to push the footer down the bottom in case there is not a lot of content in the body */
+.content {
+  flex-grow: 1;
+}
+
 .banner {
   height: 360px;
   object-fit: cover;
   width: 100%;
 }
-
-/* .about_hero_img {
-  max-width: 400px;
-} */
 
 .hero__img img {
   height: 320px;
@@ -50,6 +55,7 @@ img {
   margin-bottom: 4px;
 }
 
-.job__location, .job__salary {
+.job__location,
+.job__salary {
   margin: 0;
 }
