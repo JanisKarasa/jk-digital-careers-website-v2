@@ -23,7 +23,14 @@
         >View</a
       >
       <button type="button" class="btn btn-warning btn-sm">Update</button>
-      <button type="button" class="btn btn-danger btn-sm">Delete</button>
+      <!-- DELETE BUTTON -->
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        onClick="deleteJob(`{{job.id}}`)"
+      >
+        Delete
+      </button>
     </div>
   </div>
   {% endfor %}

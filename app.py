@@ -1,6 +1,6 @@
-from flask import Flask, render_template, jsonify, request, flash
+from flask import Flask, render_template, jsonify, request, flash, json
 # importing all function from database.py that's going to be used in our routes
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db
 
 # importing hCaptcha extension
 from flask_hcaptcha import hCaptcha
@@ -25,7 +25,7 @@ hcaptcha = hCaptcha()
 hcaptcha.init_app(app)
 # then inside of the form you want to protect, include the tag: {{ hcaptcha }}. It will insert the code automatically
 
-
+# A route that renders about.html page
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -39,6 +39,7 @@ def home():
     return render_template("home.html", jobs=jobs)
 # ... we can pass fetched DB data into the home.html template by inserting {{jobs}} into HTML, it is the way to insert DYNAMIC DATA into your HTML and CSS
 
+# A route that renders admin.html page with all the jobs to handle the updates and deletes
 @app.route("/admin")
 def admin():
     jobs = load_jobs_from_db()
@@ -118,6 +119,25 @@ def show_applications_json():
 def show_application_by_job_json(job_id):
     apps_by_job = load_application_from_db(job_id)
     return jsonify(apps_by_job)
+
+# A route that will handle the Deletion of the job posting from the database 
+@app.route("/delete-job", methods=['POST'])
+def delete_job():
+    # Load the JSON (string) data from the request body (taken from function deleteJob(id) {...body: JSON.stringify({ id: id }...} in deleteJob.js as a string) and parse it into a Python dictionary 
+    job = json.loads(request.data)
+    # Extract the 'id' field from the JSON data
+    jobID = job.get('jobID') # Use .get() to safely get the 'id' field without raising an error if it's missing
+    # Load the job with the specified 'id' from the database to check if it is not empty (None)
+    job_db = load_job_from_db(jobID)
+    # Check if the 'job_db' variable is not empty (assuming it should contain database data)
+    if job_db is not None:
+        # Delete the job from the database
+        delete_job_from_db(jobID)
+        # Returning an empty response with a status code of 204 (indicating success with no content)
+        return jsonify({}), 204
+
+    # If the job with the specified 'id' does not exist, return an appropriate response (e.g., a 404 error).
+    return jsonify({"error": "Job not found"}), 404
 
 
 if __name__ == "__main__":

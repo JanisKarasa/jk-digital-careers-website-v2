@@ -129,3 +129,11 @@ def load_application_from_db(job_id):
             for row in rows:
                 applications.append(row._asdict())
             return applications
+
+# Delete the job from database
+def delete_job_from_db(id):
+    with engine.connect() as conn:
+        conn.execute(
+            text("DELETE FROM jobs WHERE id = :val"),
+            {"val": id}  # Use a dictionary to bind the 'id' parameter
+        )
