@@ -137,3 +137,18 @@ def delete_job_from_db(id):
             text("DELETE FROM jobs WHERE id = :val"),
             {"val": id}  # Use a dictionary to bind the 'id' parameter
         )
+
+# Add the job to a database
+def add_job_to_db(job):
+    with engine.connect() as conn:
+        conn.execute(
+            text("INSERT INTO jobs (title, location, salary, currency, responsibilities, requirements) VALUES (:title, :location, :salary, :currency, :responsibilities, :requirements)"),
+            {
+                "title": job["job_title"],
+                "location": job["job_location"], 
+                "salary": job["job_salary"], 
+                "currency": job["job_currency"], 
+                "responsibilities": job["job_responsibilities"], 
+                "requirements": job["job_requirements"]
+            }
+        )

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
 # importing all function from database.py that's going to be used in our routes
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db, add_job_to_db
 
 # importing hCaptcha extension
 from flask_hcaptcha import hCaptcha
@@ -93,15 +93,15 @@ def apply_to_job(id):
         # call this function to populate/insert the data from the form/application (data = request.form) into db,
         # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
         add_application_to_db(id, data)
-        flash('hCaptcha verification passed', 'success')
+        flash('Application submitted successfully!', 'success')
         # Rendering a template where the form data (as a dictionary) is passed with the name 'application'
         # Additionally, we are passing job description data that we load by its id to use that data in the template too
         return render_template('application_submitted.html', application=data, job=job)
 
     else:
         # hCaptcha verification failed
-        flash('hCaptcha verification failed. Please try again', 'danger')
-        return render_template('application_submitted.html', application=data, job=job) 
+        flash('Something went wrong, please try again', 'danger')
+        return render_template('jobpage.html', application=data, job=job) 
 
     # we can do all sorts of things with this info (data):
     # store this ‘data’ in DB (did that)
@@ -141,6 +141,26 @@ def delete_job():
     flash('Job not found, invalid job ID!', 'danger')
     return redirect(url_for('admin'))
 
+# Rendering job_form.html
+@app.route("/admin/job_form")
+def job_form():
+    return render_template('job_form.html')
+
+# A route that handles ADDING a job posting to a database
+@app.route("/admin/create-job-posting", methods=["post"])
+def create_job_posting():
+    job = request.form
+    if hcaptcha.verify():
+    # hCaptcha verification passed
+    # call this function to populate/insert the data from the form/application (data = request.form) into db,
+    # id argument is used to populate the job_id column in db, and data argument is used to populate the rest of the columns in db
+        add_job_to_db(job)
+        flash('Job posting was created successfully!', 'success')
+        return redirect(url_for('admin'))
+    else:
+        # hCaptcha verification failed
+        flash('Something went wrong, please try again', 'danger')
+        return render_template('job_form.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
