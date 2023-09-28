@@ -1,0 +1,9 @@
+<!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+%}
+<div>
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }} p-2">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}

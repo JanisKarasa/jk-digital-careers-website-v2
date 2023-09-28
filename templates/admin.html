@@ -4,33 +4,40 @@
 <h1 class="text-center mt-5 mb-4">Manage Job Listings</h1>
 
 <div class="container">
-  {% for job in jobs %}
+  <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
+  {% include 'includes/flash_message_logic.html' %} {% for job in jobs %}
   <div class="jobs__wrapper">
     <!-- looping through the jobs=JOBS - the list of many dictionaries, putting them in tags and giving them styling-->
-    <div class="jobs__info">
-      <h4 class="job__title">{{job.title}}</h4>
-      <p class="job__location"><b>Location:</b> {{job.location}}</p>
-      <!-- if the salary is not listed for some roles, we are handling with conditional -->
-      {% if job.salary %}
-      <p class="job__salary"><b>Salary:</b> {{job.currency}} {{job.salary}}</p>
-      {% else %}
-      <p class="job__salary"><b>Salary:</b> Undisclosed</p>
-      {% endif %}
-    </div>
+    {% include 'includes/jobitem.html' %}
     <div class="button__wrapper">
-      <!-- Linking the button to application form of the specific job -->
+      <!-- Linking the button to all applications for the specific job -->
+      <a href="/api/apps_by_job/{{job.id}}" class="btn btn-outline-primary btn-sm"
+        >View Applications</a
+      >
       <a href="/api/job/{{job.id}}" class="btn btn-outline-primary btn-sm"
-        >View</a
+        >View Job Description</a
       >
       <button type="button" class="btn btn-warning btn-sm">Update</button>
-      <!-- DELETE BUTTON -->
-      <button
+
+      <!-- DELETE BUTTON with FORM, INPUT & BUTTON -->
+      <!-- Start of a form element with the HTTP POST method sending info to "/delete-job" route/endpoint -->
+      <form method="POST" action="/delete-job" class="d-inline-block">
+        <!-- Hidden input field to store/populate the job ID value -->
+        <!-- 'name' is used as the key, and it specifies the name of the form field. 'value' is used as the value associated with that form field. -->
+        <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
+        <input type="hidden" name="job_id" value="{{ job.id }}" />
+        <!-- Delete button triggering the form submission - sending ImmutableMultiDict([('job_id', 'x')]) to "/delete-job" request.form -->
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+
+      <!-- DELETE BUTTON with JAVASCRIPT -->
+      <!-- <button
         type="button"
         class="btn btn-danger btn-sm"
         onClick="deleteJob(`{{job.id}}`)"
       >
         Delete
-      </button>
+      </button> -->
     </div>
   </div>
   {% endfor %}

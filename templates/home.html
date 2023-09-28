@@ -39,7 +39,17 @@ block content %}
 
   <div>
     <!-- looping through the jobs=jobs - the list of many dictionaries, putting them in tags and giving them styling -->
-    {% for job in jobs %} {% include 'includes/jobitem.html' %} {% endfor %}
+    {% for job in jobs %}
+    <div class="jobs__wrapper">
+      {% include 'includes/jobitem.html' %}
+      <div>
+        <!-- Linking the button to application form of the specific job -->
+        <a href="/job/{{job.id}}" class="btn btn-outline-primary btn-sm"
+          >Apply</a
+        >
+      </div>
+    </div>
+    {% endfor %}
   </div>
 
   <div class="text-center">

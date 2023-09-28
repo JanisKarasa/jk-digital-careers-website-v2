@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, flash, json
+from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
 # importing all function from database.py that's going to be used in our routes
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db
 
@@ -123,21 +123,23 @@ def show_application_by_job_json(job_id):
 # A route that will handle the Deletion of the job posting from the database 
 @app.route("/delete-job", methods=['POST'])
 def delete_job():
-    # Load the JSON (string) data from the request body (taken from function deleteJob(id) {...body: JSON.stringify({ id: id }...} in deleteJob.js as a string) and parse it into a Python dictionary 
-    job = json.loads(request.data)
-    # Extract the 'id' field from the JSON data
-    jobID = job.get('jobID') # Use .get() to safely get the 'id' field without raising an error if it's missing
+    # Extract data from the request body (taken from form in admin.html)
+    job = request.form # ImmutableMultiDict([('job_id', 'x')]) - a special type of dictionary-like object provided by Flask that is immutable
+    # Extract the 'id' field from dictionary-like structure containing a single key-value pair
+    jobID = job.get('job_id') # Use .get() to safely get the 'id' field without raising an error if it's missing
     # Load the job with the specified 'id' from the database to check if it is not empty (None)
     job_db = load_job_from_db(jobID)
     # Check if the 'job_db' variable is not empty (assuming it should contain database data)
     if job_db is not None:
         # Delete the job from the database
         delete_job_from_db(jobID)
-        # Returning an empty response with a status code of 204 (indicating success with no content)
-        return jsonify({}), 204
+        # Redirect to admin.html and flash the message
+        flash('Job deleted successfully!', 'success')
+        return redirect(url_for('admin'))
 
-    # If the job with the specified 'id' does not exist, return an appropriate response (e.g., a 404 error).
-    return jsonify({"error": "Job not found"}), 404
+    # If the job with the specified 'id' does not exist, redirect to admin.html and flash the message
+    flash('Job not found, invalid job ID!', 'danger')
+    return redirect(url_for('admin'))
 
 
 if __name__ == "__main__":
