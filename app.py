@@ -1,6 +1,6 @@
-from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
+from flask import Flask, render_template, jsonify, request, flash, redirect, url_for, json
 # importing all function from database.py that's going to be used in our routes
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db, add_job_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db, add_job_to_db, update_job_in_db
 
 # importing hCaptcha extension
 from flask_hcaptcha import hCaptcha
@@ -121,7 +121,7 @@ def show_application_by_job_json(job_id):
     return jsonify(apps_by_job)
 
 # A route that will handle the Deletion of the job posting from the database 
-@app.route("/delete-job", methods=['POST'])
+@app.route("/admin/delete-job", methods=['POST'])
 def delete_job():
     # Extract data from the request body (taken from form in admin.html)
     job = request.form # ImmutableMultiDict([('job_id', 'x')]) - a special type of dictionary-like object provided by Flask that is immutable
@@ -141,10 +141,10 @@ def delete_job():
     flash('Job not found, invalid job ID!', 'danger')
     return redirect(url_for('admin'))
 
-# Rendering job_form.html
-@app.route("/admin/job_form")
-def job_form():
-    return render_template('job_form.html')
+# Rendering create_job_form.html
+@app.route("/admin/create-job")
+def create_job():
+    return render_template('create_job_form.html')
 
 # A route that handles ADDING a job posting to a database
 @app.route("/admin/create-job-posting", methods=["post"])
@@ -160,7 +160,38 @@ def create_job_posting():
     else:
         # hCaptcha verification failed
         flash('Something went wrong, please try again', 'danger')
-        return render_template('job_form.html')
+        return render_template('create_job_form.html')
+
+# Rendering update_job_form.html with all the fields populated with data from db
+@app.route("/admin/update-job", methods=["POST"])
+def update_job():
+    job = request.form
+    jobID = job.get('job_id') 
+    job_db = load_job_from_db(jobID)
+    if job_db is not None:
+        return render_template('update_job_form.html', job=job_db)
+    return jsonify({"error": "Job not found"}), 404
+
+# A route that handles UPDATING a job posting in the database
+@app.route("/admin/update-job-posting/<id>", methods=["post"])
+def update_job_posting(id):
+    new_job_data = request.form
+    # job_id = new_job_data.get("id")
+    job_db = load_job_from_db(id)
+    if job_db is not None:
+        update_job_in_db(id, new_job_data)
+        flash('Job posting was updated successfully!', 'success')
+        return redirect(url_for('admin'))
+    flash('Something went wrong, please try again', 'danger')
+    return redirect(update_job)
+
+# A route that handles a job posting SUSPENSION 
+@app.route("/admin/suspend/job/<id>")
+def suspend(id):
+    return jsonify({"INFO": "THIS WILL SUSPEND JOB POSTING from PUBLISHING but will remain in DATABASE as APPLICATIONS will be attached to it",
+                    "TODO-1": "STOP displaying on careers page",
+                    "TODO-2": "Make the job posting GRAY color in ADMIN page to let know that it is SUSPENDED"})
+
 
 if __name__ == "__main__":
     app.run(debug=True)

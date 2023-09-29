@@ -3,13 +3,13 @@ block content %}
 
 <div class="container">
   <!-- TITLE of the FORM -->
-  <h4 class="mt-5 text-center">Create a New Job Posting</h4>
+  <h4 class="mt-5 text-center">Update a Job Posting</h4>
   <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
   {% include 'includes/flash_message_logic.html' %}
-  <form action="/admin/create-job-posting" method="post">
+  <form action="/admin/update-job-posting/{{job.id}}" method="post">
     <!-- Now form data is posted, it is sent by the browser along with the (http post) request to this URL (http://127.0.0.1:5000/job/3/apply),
-    to this server, and the server, which is running my Flask app, receives the request. This data is included in the body of the HTTP request.
-    And now that data is accessed/retrieved using request.form in (‘/job/<id>/apply’, method=[post]) route in app.py to do all sorts of things ... -->
+        to this server, and the server, which is running my Flask app, receives the request. This data is included in the body of the HTTP request.
+        And now that data is accessed/retrieved using request.form in (‘/job/<id>/apply’, method=[post]) route in app.py to do all sorts of things ... -->
 
     <!-- JOB TITLE -->
     <div class="mb-2">
@@ -19,6 +19,7 @@ block content %}
         required
         id="job_title"
         name="job_title"
+        value="{{ job.title }}"
         placeholder="Python Engineer"
       />
     </div>
@@ -31,6 +32,7 @@ block content %}
         required
         id="job_location"
         name="job_location"
+        value="{{ job.location }}"
         placeholder="Hamburg"
       />
     </div>
@@ -38,49 +40,63 @@ block content %}
     <!-- SALARY -->
     <div class="mb-2">
       <label for="job_salary">Salary</label><br />
-      <input type="number" id="job_salary" name="job_salary" />
+      <input
+        type="number"
+        id="job_salary"
+        name="job_salary"
+        value="{{ job.salary }}"
+      />
     </div>
 
     <!-- CURRENCY -->
     <div class="mb-2">
       <label for="job_currency">Currency</label><br />
-      <input type="text" id="job_currency" name="job_currency" />
+      <input
+        type="text"
+        id="job_currency"
+        name="job_currency"
+        value="{{ job.currency }}"
+      />
     </div>
 
     <!-- RESPONSIBILITIES -->
     <div class="mb-2">
       <label for="job_responsibilities">Responsibilities</label><br />
       <textarea
-        type="text"
         required
         id="job_responsibilities"
         name="job_responsibilities"
         cols="40"
         rows="10"
-      ></textarea>
+      >
+{{ job.responsibilities }}</textarea
+      >
+      <!-- because the <textarea> element does not have a value attribute, place the initial value inside the <textarea> element as its content -->
     </div>
 
     <!-- REQUIREMENTS -->
     <div class="mb-2">
-      <label for="job_requirements">Work Experience</label><br />
+      <label for="job_requirements">Requirements</label><br />
       <textarea
-        type="text"
         required
         id="job_requirements"
         name="job_requirements"
         cols="40"
         rows="10"
-      ></textarea>
+      >
+{{ job.requirements }}</textarea
+      >
+      <!-- because the <textarea> element does not have a value attribute, place the initial value inside the <textarea> element as its content -->
     </div>
 
     <!-- hCAPTCHA -->
-    {{ hcaptcha }}
+    <!-- {{ hcaptcha }} -->
 
     <!-- SUBMIT BUTTON -->
-    <input type="submit" />
+    <input type="submit" value="Update" class="btn btn-warning btn-sm" />
     <!-- When a user clicks on a button with type="submit" within an HTML form, it triggers the submission of that form. 
-    This means that the data entered into the form fields is sent to the server for processing. 
-    When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->
+        This means that the data entered into the form fields is sent to the server for processing. 
+        When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->
   </form>
 </div>
 

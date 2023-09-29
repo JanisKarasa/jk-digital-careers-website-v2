@@ -50,6 +50,15 @@ img {
   border-bottom: 1px solid lightgray;
 }
 
+@media only screen and (max-width: 768px) {
+  .jobs__wrapper {
+    flex-wrap: wrap;
+  }
+  .button__wrapper {
+    margin-top: 5px;
+  }
+}
+
 .job__title {
   color: rgb(120, 120, 120);
   margin-bottom: 4px;

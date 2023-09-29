@@ -11,18 +11,30 @@
     {% include 'includes/jobitem.html' %}
     <div class="button__wrapper">
       <!-- Linking the button to all applications for the specific job -->
-      <a href="/api/apps_by_job/{{job.id}}" class="btn btn-outline-primary btn-sm"
+      <a
+        href="/api/apps_by_job/{{job.id}}"
+        class="btn btn-outline-primary btn-sm"
         >View Applications</a
       >
       <a href="/api/job/{{job.id}}" class="btn btn-outline-primary btn-sm"
         >View Job Description</a
       >
-      <button type="button" class="btn btn-warning btn-sm">Update</button>
+
+      <!-- UPDATE BUTTON with FORM, INPUT & BUTTON -->
+      <!-- Start of a form element with the HTTP POST method sending info to "/admin/update-job" route/endpoint -->
+      <form method="POST" action="/admin/update-job" class="d-inline-block">
+        <!-- Hidden input field to store/populate the job ID value to send it to endpoint to render the update form with job details to edit -->
+        <!-- 'name' is used as the key, and it specifies the name of the form field. 'value' is used as the value associated with that form field. -->
+        <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
+        <input type="hidden" name="job_id" value="{{ job.id }}" />
+        <!-- Delete button triggering the form submission - sending ImmutableMultiDict([('job_id', 'x')]) to "/admin/update-job" request.form -->
+        <button type="submit" class="btn btn-warning btn-sm">Update</button>
+      </form>
 
       <!-- DELETE BUTTON with FORM, INPUT & BUTTON -->
       <!-- Start of a form element with the HTTP POST method sending info to "/delete-job" route/endpoint -->
-      <form method="POST" action="/delete-job" class="d-inline-block">
-        <!-- Hidden input field to store/populate the job ID value -->
+      <form method="POST" action="/admin/delete-job" class="d-inline-block">
+        <!-- Hidden input field to store/populate the job ID value to send it to endpoint that takes care of deletion-->
         <!-- 'name' is used as the key, and it specifies the name of the form field. 'value' is used as the value associated with that form field. -->
         <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
         <input type="hidden" name="job_id" value="{{ job.id }}" />
@@ -30,26 +42,18 @@
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
       </form>
 
-      <!-- DELETE BUTTON with JAVASCRIPT -->
-      <!-- <button
-        type="button"
-        class="btn btn-danger btn-sm"
-        onClick="deleteJob(`{{job.id}}`)"
+      <a href="/admin/suspend/job/{{job.id}}" class="btn btn-secondary btn-sm"
+        >Suspend</a
       >
-        Delete
-      </button> -->
     </div>
   </div>
   {% endfor %}
 
   <div class="text-center">
-    <a
-      href="admin/job_form"
-      class="btn btn-primary btn-lg"
+    <a href="/admin/create-job" class="btn btn-primary btn-lg"
       >Create Job Posting</a
     >
   </div>
-
 </div>
 
 {% endblock %}

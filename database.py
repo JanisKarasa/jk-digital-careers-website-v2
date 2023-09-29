@@ -152,3 +152,19 @@ def add_job_to_db(job):
                 "requirements": job["job_requirements"]
             }
         )
+
+# Update the job posting
+def update_job_in_db(job_id, new_job_data):
+    with engine.connect() as conn:
+        conn.execute(
+            text("UPDATE jobs SET title = :title, location = :location, salary = :salary, currency = :currency, responsibilities = :responsibilities, requirements = :requirements WHERE id = :job_id"),
+            {
+            "title": new_job_data["job_title"],
+            "location": new_job_data["job_location"],
+            "salary": new_job_data["job_salary"],
+            "currency": new_job_data["job_currency"],
+            "responsibilities": new_job_data["job_responsibilities"],
+            "requirements": new_job_data["job_requirements"],
+            "job_id": job_id
+            }
+        )

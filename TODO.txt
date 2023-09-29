@@ -12,3 +12,4 @@ admins can add jobs,
 admins can delete jobs, 
 2. admins can mark applications as accepted or rejected 
 3. and users can also maybe login to check their application status,
+4. Add SUSPEND Button in Admin page to suspend job posting being published as it could be attached to applications
