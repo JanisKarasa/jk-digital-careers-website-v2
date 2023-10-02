@@ -16,7 +16,7 @@ This version (v2) includes **MySQL Database** connection on the backend
 - Basics of Flask
 ### Bootstrap:
 - Styling with Bootstrap framework
-- Adding a Navbar and Footer from Bootstrap
+- Adding a NavBar, NavMenu, Footer and Modals from Bootstrap
 ### Jinja:
 - Inserting Dynamic Data into HTML templates
 - Rendering Dynamic Data using Jinja template tags
@@ -39,8 +39,11 @@ This version (v2) includes **MySQL Database** connection on the backend
     Connecting MySQL Workbench to database on PlanetScale.com <br>
     Creating tables and inserting data using both SQL queries and direct inserts <br>
 - Connecting Web App to database hosted on cloud using **SQLAlchemy** library in Python
-- Retrieving data from a database and converting it to a list of dictionary objects
-- Inserting data into database using submission form in HTML
+- Implementing CRUD functionality: <br>
+    Inserting data into database using submission form in HTML <br>
+    Retrieving data from a database and converting it to a list of dictionary objects <br>
+    Updating data in the database using submission form in HTML <br>
+    Deleting data from the database <br>
 - Incorporating database queries into the code with dynamically bound parameters linked to the dynamic parts of URL routes
 - Managing sensitive connection credentials as environment variables with a Secret File (.env) and python-dotenv library for safe deployment
 - Managing SSL Certificates for safe connection to a database

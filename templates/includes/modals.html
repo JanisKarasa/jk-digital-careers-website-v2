@@ -1,0 +1,59 @@
+<!-- Modal for DELETE functionality that will ask if the user is sure to delete the item -->
+<div
+  class="modal fade"
+  id="ModalDELETE-{{ job.id }}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal's Header -->
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Are you sure you want to delete this job posting?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- Modal's BODY -->
+      <div class="modal-body">
+        <!-- In Modal's body we give some information/description about the job we want to delete -->
+        <div class="jobs__info">
+          <h4 class="job__title">{{job.title}}</h4>
+          <p class="job__location"><b>Location:</b> {{job.location}}</p>
+          <!-- if the salary is not listed for some roles, we are handling with conditional -->
+          {% if job.salary %}
+          <p class="job__salary">
+            <b>Salary:</b> {{job.currency}} {{job.salary}}
+          </p>
+          {% else %}
+          <p class="job__salary"><b>Salary:</b> Undisclosed</p>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Modal's FOOTER -->
+      <div class="modal-footer">
+        <!-- Cancel button -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+
+        <!-- Delete BUTTON with FORM, INPUT & BUTTON -->
+        <!-- Start of a form element with the HTTP POST method sending info to "/admin/delete-job" route/endpoint -->
+        <form method="POST" action="/admin/delete-job" class="d-inline-block">
+          <!-- Hidden input field to store/populate the job ID value to send it to endpoint to render the update form with job details to edit -->
+          <!-- 'name' is used as the key, and it specifies the name of the form field. 'value' is used as the value associated with that form field. -->
+          <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
+          <input type="hidden" name="job_id" value="{{ job.id }}" />
+          <!-- Delete button triggering the form submission - sending ImmutableMultiDict([('job_id', 'x')]) to "/admin/delete-job" request.form -->
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

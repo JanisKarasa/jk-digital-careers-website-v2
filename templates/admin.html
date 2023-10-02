@@ -6,16 +6,24 @@
 <div class="container">
   <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
   {% include 'includes/flash_message_logic.html' %} {% for job in jobs %}
+
   <div class="jobs__wrapper">
     <!-- looping through the jobs=JOBS - the list of many dictionaries, putting them in tags and giving them styling-->
+
+    <!-- Including JOB ITEMS -->
     {% include 'includes/jobitem.html' %}
+
     <div class="button__wrapper">
-      <!-- Linking the button to all applications for the specific job -->
+      <!-- Include Modal -->
+      {% include 'includes/modals.html' %}
+
+      <!-- Linking the button to api that gets all applications for the specific job -->
       <a
         href="/api/apps_by_job/{{job.id}}"
         class="btn btn-outline-primary btn-sm"
         >View Applications</a
       >
+      <!-- Linking the button to api that gets a job description -->
       <a href="/api/job/{{job.id}}" class="btn btn-outline-primary btn-sm"
         >View Job Description</a
       >
@@ -39,7 +47,14 @@
         <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
         <input type="hidden" name="job_id" value="{{ job.id }}" />
         <!-- Delete button triggering the form submission - sending ImmutableMultiDict([('job_id', 'x')]) to "/delete-job" request.form -->
-        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalDELETE-{{ job.id }}"
+        >
+          Delete
+        </button>
       </form>
 
       <a href="/admin/suspend/job/{{job.id}}" class="btn btn-secondary btn-sm"
