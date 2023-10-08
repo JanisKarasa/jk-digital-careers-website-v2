@@ -47,6 +47,8 @@
         <!-- When the form is submitted, the data is sent to the server as a key-value pair. -->
         <input type="hidden" name="job_id" value="{{ job.id }}" />
         <!-- Delete button triggering the form submission - sending ImmutableMultiDict([('job_id', 'x')]) to "/delete-job" request.form -->
+        <!-- Use Modal (data-bs-toggle="modal") to confirm if the user is sure to delete the item. Modal that has DELETE functionality is taken from 'modals.html' by its ID - #ModalDELETE-{{ job.id }} -->
+        <!-- That Modal contains DYNAMIC VARIABLE {{ job.id }} that identifies the job that's going to be deleted -->
         <button
           type="button"
           class="btn btn-danger btn-sm"
