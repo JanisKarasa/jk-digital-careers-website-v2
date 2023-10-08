@@ -3,7 +3,7 @@ block content %}
 
 <div class="container">
   <!-- TITLE of the FORM -->
-  <h4 class="mt-5 text-center">Update a Job Posting</h4>
+  <h4 class="mt-5 mb-4 text-center">Update a Job Posting</h4>
   <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
   {% include 'includes/flash_message_logic.html' %}
   <form action="/admin/update-job-posting/{{job.id}}" method="post">
@@ -12,10 +12,11 @@ block content %}
         And now that data is accessed/retrieved using request.form in (‘/admin/update-job-posting/<job.id>’, method=[post]) route in app.py to do all sorts of things ... -->
 
     <!-- JOB TITLE -->
-    <div class="mb-2">
-      <label for="job_title">Job Title</label><br />
+    <div class="mb-3">
+      <label for="job_title" class="form-label">Job Title</label><br />
       <input
         type="text"
+        class="form-control"
         required
         id="job_title"
         name="job_title"
@@ -25,10 +26,11 @@ block content %}
     </div>
 
     <!-- LOCATION -->
-    <div class="mb-2">
-      <label for="job_location">Location</label><br />
+    <div class="mb-3">
+      <label for="job_location" class="form-label">Location</label><br />
       <input
         type="text"
+        class="form-control"
         required
         id="job_location"
         name="job_location"
@@ -38,10 +40,11 @@ block content %}
     </div>
 
     <!-- SALARY -->
-    <div class="mb-2">
-      <label for="job_salary">Salary</label><br />
+    <div class="mb-3">
+      <label for="job_salary" class="form-label">Salary</label><br />
       <input
         type="number"
+        class="form-control"
         id="job_salary"
         name="job_salary"
         value="{{ job.salary }}"
@@ -49,10 +52,11 @@ block content %}
     </div>
 
     <!-- CURRENCY -->
-    <div class="mb-2">
-      <label for="job_currency">Currency</label><br />
+    <div class="mb-3">
+      <label for="job_currency" class="form-label">Currency</label><br />
       <input
         type="text"
+        class="form-control"
         id="job_currency"
         name="job_currency"
         value="{{ job.currency }}"
@@ -60,10 +64,11 @@ block content %}
     </div>
 
     <!-- RESPONSIBILITIES -->
-    <div class="mb-2">
-      <label for="job_responsibilities">Responsibilities</label><br />
+    <div class="mb-3">
+      <label for="job_responsibilities" class="form-label">Responsibilities</label><br />
       <textarea
         required
+        class="form-control"
         id="job_responsibilities"
         name="job_responsibilities"
         cols="40"
@@ -75,10 +80,11 @@ block content %}
     </div>
 
     <!-- REQUIREMENTS -->
-    <div class="mb-2">
-      <label for="job_requirements">Requirements</label><br />
+    <div class="mb-3">
+      <label for="job_requirements" class="form-label">Requirements</label><br />
       <textarea
         required
+        class="form-control"
         id="job_requirements"
         name="job_requirements"
         cols="40"

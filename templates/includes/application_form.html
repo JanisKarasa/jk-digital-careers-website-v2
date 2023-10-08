@@ -1,50 +1,54 @@
 <!-- TITLE of the FORM -->
-<h4 class="mt-5">Application Form</h4>
+<h4 class="mt-5 mb-4 text-center">Application Form</h4>
 <form action="/job/{{job.id}}/apply" method="post">
   <!-- Now form data is posted, it is sent by the browser along with the (http post) request to this URL (http://127.0.0.1:5000/job/3/apply),
     to this server, and the server, which is running my Flask app, receives the request. This data is included in the body of the HTTP request.
     And now that data is accessed/retrieved using request.form in (‘/job/<id>/apply’, method=[post]) route in app.py to do all sorts of things ... -->
 
   <!-- NAME -->
-  <div class="mb-2">
-    <label for="full_name">Full Name</label><br />
+  <div class="mb-3">
+    <label for="full_name" class="form-label">Full Name</label><br />
     <input
       type="text"
+      class="form-control"
       required
       id="full_name"
       name="full_name"
-      placeholder="Bruce Wayne"
+      placeholder=""
     />
   </div>
 
   <!-- EMAIL -->
-  <div class="mb-2">
-    <label for="email">Email</label><br />
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label><br />
     <input
       type="email"
+      class="form-control"
       required
       id="email"
       name="email"
-      placeholder="bruce@wayne.com"
+      placeholder=""
     />
   </div>
 
   <!-- LinkedIn -->
-  <div class="mb-2">
-    <label for="linkedin_url">LinkedIn URL</label><br />
+  <div class="mb-3">
+    <label for="linkedin_url" class="form-label">LinkedIn URL</label><br />
     <input
       type="url"
+      class="form-control"
       id="linkedin_url"
       name="linkedin_url"
-      placeholder="https://linkedin/in/brucewayne"
+      placeholder=""
     />
   </div>
 
   <!-- EDUCATION -->
-  <div class="mb-2">
-    <label for="education">Education</label><br />
+  <div class="mb-3">
+    <label for="education" class="form-label">Education</label><br />
     <textarea
       type="text"
+      class="form-control"
       id="education"
       name="education"
       cols="40"
@@ -53,10 +57,12 @@
   </div>
 
   <!-- WORK EXPERIENCE -->
-  <div class="mb-2">
-    <label for="work_experience">Work Experience</label><br />
+  <div class="mb-3">
+    <label for="work_experience" class="form-label">Work Experience</label
+    ><br />
     <textarea
       type="text"
+      class="form-control"
       id="work_experience"
       name="work_experience"
       cols="40"
@@ -65,13 +71,14 @@
   </div>
 
   <!-- RESUME URL -->
-  <div class="mb-2">
-    <label for="resume_url">Resume URL</label><br />
+  <div class="mb-3">
+    <label for="resume_url" class="form-label">Resume URL</label><br />
     <input
       type="url"
+      class="form-control"
       id="resume_url"
       name="resume_url"
-      placeholder="https://brucewayne.me"
+      placeholder=""
     />
   </div>
 
@@ -79,7 +86,7 @@
   {{ hcaptcha }}
 
   <!-- SUBMIT BUTTON -->
-  <input type="submit" value="SUBMIT" class="btn btn-primary btn-sm"/>
+  <input type="submit" value="SUBMIT" class="btn btn-primary btn-sm" />
   <!-- When a user clicks on a button with type="submit" within an HTML form, it triggers the submission of that form. 
     This means that the data entered into the form fields is sent to the server for processing. 
     When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->

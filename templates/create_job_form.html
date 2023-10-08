@@ -5,7 +5,7 @@ block content %}
 
 <div class="container">
   <!-- TITLE of the FORM -->
-  <h4 class="mt-5 text-center">Create a New Job Posting</h4>
+  <h4 class="mt-5 mb-4 text-center">Create a New Job Posting</h4>
 
   <!-- FLASH MESSAGE that changes colors (red or green) according to category (success or danger)-->
   {% include 'includes/flash_message_logic.html' %}
@@ -16,46 +16,61 @@ block content %}
     And now that data is accessed/retrieved using request.form in (‘/admin/create-job-posting’, method=[post]) route in app.py to do all sorts of things ... -->
 
     <!-- JOB TITLE -->
-    <div class="mb-2">
-      <label for="job_title">Job Title</label><br />
+    <div class="mb-3">
+      <label for="job_title" class="form-label">Job Title</label><br />
       <input
         type="text"
+        class="form-control"
         required
         id="job_title"
         name="job_title"
-        placeholder="Python Engineer"
+        placeholder=""
       />
     </div>
 
     <!-- LOCATION -->
-    <div class="mb-2">
-      <label for="job_location">Location</label><br />
+    <div class="mb-3">
+      <label for="job_location" class="form-label">Location</label><br />
       <input
         type="text"
+        class="form-control"
         required
         id="job_location"
         name="job_location"
-        placeholder="Hamburg"
+        placeholder=""
       />
     </div>
 
     <!-- SALARY -->
-    <div class="mb-2">
-      <label for="job_salary">Salary</label><br />
-      <input type="number" id="job_salary" name="job_salary" />
+    <div class="mb-3">
+      <label for="job_salary" class="form-label">Salary</label><br />
+      <input
+        type="number"
+        class="form-control"
+        id="job_salary"
+        name="job_salary"
+      />
     </div>
 
     <!-- CURRENCY -->
-    <div class="mb-2">
-      <label for="job_currency">Currency</label><br />
-      <input type="text" id="job_currency" name="job_currency" />
+    <div class="mb-3">
+      <label for="job_currency" class="form-label">Currency</label><br />
+      <input
+        type="text"
+        class="form-control"
+        id="job_currency"
+        name="job_currency"
+      />
     </div>
 
     <!-- RESPONSIBILITIES -->
-    <div class="mb-2">
-      <label for="job_responsibilities">Responsibilities</label><br />
+    <div class="mb-3">
+      <label for="job_responsibilities" class="form-label"
+        >Responsibilities</label
+      ><br />
       <textarea
         type="text"
+        class="form-control"
         required
         id="job_responsibilities"
         name="job_responsibilities"
@@ -65,10 +80,12 @@ block content %}
     </div>
 
     <!-- REQUIREMENTS -->
-    <div class="mb-2">
-      <label for="job_requirements">Work Experience</label><br />
+    <div class="mb-3">
+      <label for="job_requirements" class="form-label">Work Experience</label
+      ><br />
       <textarea
         type="text"
+        class="form-control"
         required
         id="job_requirements"
         name="job_requirements"
@@ -81,7 +98,7 @@ block content %}
     {{ hcaptcha }}
 
     <!-- SUBMIT BUTTON -->
-    <input type="submit" value="Create" class="btn btn-primary btn-lg" />
+    <input type="submit" value="Create" class="btn btn-primary btn-sm" />
     <!-- When a user clicks on a button with type="submit" within an HTML form, it triggers the submission of that form. 
     This means that the data entered into the form fields is sent to the server for processing. 
     When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->
