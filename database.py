@@ -168,3 +168,54 @@ def update_job_in_db(job_id, new_job_data):
             "job_id": job_id
             }
         )
+
+# Inject Dummy Data into the database
+def add_dummy_jobs_to_db():
+    with engine.connect() as conn:
+        conn.execute(
+            text("INSERT INTO jobs (title, location, salary, currency, responsibilities, requirements) " + 
+                 "VALUES (:title, :location, :salary, :currency, :responsibilities, :requirements)"),
+            {
+                "title": "Data Analyst",
+                "location": "San Francisco", 
+                "salary": "100000", 
+                "currency": "USD", 
+                "responsibilities": "Process data using Python, SQL and other tools through the analytics data pipeline \r\nIdentify and translate business rules into specifications and documentation \r\nEnsure quality control and follow peer review guidelines \r\nAdhere to best practices and standards, maintaining process efficiencies", 
+                "requirements": "Bachelor's degree (required) or above in Computer Science, Mathematics, Economics, or experience in related analytical field \r\nExcellent analytic and creative problem-solving skills \r\n1-3 years Python and SQL programming experience \r\nBasic skills in MS Excel Knowledge of cloud computing platforms (AWS, GCP) and knowledge of Spark is desired",
+            })
+        conn.execute(
+            text("INSERT INTO jobs (title, location, salary, currency, responsibilities, requirements) " + 
+                 "VALUES (:title, :location, :salary, :currency, :responsibilities, :requirements)"),
+            {
+                "title": "Data Scientist",
+                "location": "Paris, France", 
+                "salary": "140000", 
+                "currency": "EUR", 
+                "responsibilities": "Draft detailed scope for assigned projects, Addressing suggested methodology and execution framework \r\nExecute on the plan with appropriate data mining, analytical and data science techniques \r\nPerform quality assurance of data and deliverables for work performed by other Data Scientists, Data Engineers and self \r\nAccountable for the quality of the end solution or model by planning the required reviews on code and process.", 
+                "requirements": "Expert knowledge in Deep Learning techniques and exploring newer approaches like federated learning and transfer learning \r\nProficient in some or all of the following techniques: Linear & Logistic Regression, Decision Trees, Random Forests, K-Nearest Neighbors, Markov Chain, Monte Carlo, Gibbs Sampling, Evolutionary Algorithms, Support Vector Machines \r\nProficient in advanced data mining and statistical modeling techniques, including Predictive modeling"
+            }
+        )
+        conn.execute(
+            text("INSERT INTO jobs (title, location, salary, currency, responsibilities, requirements) " + 
+                 "VALUES (:title, :location, :salary, :currency, :responsibilities, :requirements)"),
+            {
+                "title": "Backend Engineer",
+                "location": "London, UK", 
+                "salary": None, 
+                "currency": None, 
+                "responsibilities": "Design and develop a cloud based backend \r\nParticipate and produce a scalable cloud based backend system \r\nDesign and develop REST based APIs \r\nInteract with customer directly and with other stakeholders in the organization", 
+                "requirements": "Hands on experience with building a web backend in Java or Golang \r\nKnowledge of designing and building REST APIs \r\nProven experience in building a scalable and resilient backend \r\nGood understanding of database schemas and using both relational (SQL) and noSQL based data stores \r\nStrong analytical and debugging skills"
+            }
+        )
+        conn.execute(
+            text("INSERT INTO jobs (title, location, salary, currency, responsibilities, requirements) " + 
+                 "VALUES (:title, :location, :salary, :currency, :responsibilities, :requirements)"),
+            {
+                "title": "Frontend Engineer",
+                "location": "New Delhi, India", 
+                "salary": "1200000", 
+                "currency": "Rs", 
+                "responsibilities": "Translate designs and wireframes into high quality JS, CSS, HTML templates \r\nDesign, build, and maintain high performance, reusable, and reliable UI components and products \r\nEnsure the best possible performance, quality, and optimize for maximum speed and scalability \r\nIdentify and correct bottlenecks and fix bugs. \r\nHelp maintain code quality, organization, and automatization.", 
+                "requirements": "Strong knowledge of programming skills in JS, CSS and HTML \r\nFamiliarity with responsive and adaptive web design, and good knowledge of JS libraries such as jQuery \r\nStrong knowledge of about at least one of the JS frameworks (e.g. VueJS, Angular JS, NodeJS, ReactJS) \r\nExperience with building websites, ability to handle cross browser compatibility issues"
+            }
+        )

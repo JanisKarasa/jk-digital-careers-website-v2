@@ -65,7 +65,9 @@ block content %}
 
     <!-- RESPONSIBILITIES -->
     <div class="mb-3">
-      <label for="job_responsibilities" class="form-label">Responsibilities</label><br />
+      <label for="job_responsibilities" class="form-label"
+        >Responsibilities</label
+      ><br />
       <textarea
         required
         class="form-control"
@@ -81,7 +83,8 @@ block content %}
 
     <!-- REQUIREMENTS -->
     <div class="mb-3">
-      <label for="job_requirements" class="form-label">Requirements</label><br />
+      <label for="job_requirements" class="form-label">Requirements</label
+      ><br />
       <textarea
         required
         class="form-control"
@@ -103,11 +106,11 @@ block content %}
     <!-- When a user clicks on a button with type="submit" within an HTML form, it triggers the submission of that form. 
         This means that the data entered into the form fields is sent to the server for processing. 
         When clicked, it will trigger the submission of the form, sending the data to the server-side URL specified in the action attribute.-->
-    
+
     <!-- RESET BUTTON -->
     <!-- Resets data back to original data taken from database -->
     <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
-    
+
     <!-- CANCEL BUTTON -->
     <a href="{{ url_for('admin') }}" class="btn btn-danger btn-sm">Cancel</a>
   </form>

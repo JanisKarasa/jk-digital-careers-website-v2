@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, flash, redirect, url_for, json
 # importing all function from database.py that's going to be used in our routes
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db, add_job_to_db, update_job_in_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, load_applications_from_db, load_application_from_db, delete_job_from_db, add_job_to_db, update_job_in_db, add_dummy_jobs_to_db
 
 # importing hCaptcha extension
 from flask_hcaptcha import hCaptcha
@@ -192,6 +192,16 @@ def suspend(id):
                     "TODO-1": "STOP displaying on careers page",
                     "TODO-2": "Make the job posting GRAY color in ADMIN page to let know that it is SUSPENDED"})
 
+# A route that handles dummy data injection for testing purposes
+@app.route("/admin/add_dummy_jobs")
+def add_dummy_jobs():
+    current_amount_of_jobs = load_jobs_from_db()
+    if len(current_amount_of_jobs) < 14:
+        add_dummy_jobs_to_db()
+        flash('Dummy Job Data was injected successfully!', 'success')
+        return redirect(admin)
+    flash('Let\'s not Litter our database with too many records, please delete some and try again', 'danger')
+    return redirect(admin)
 
 if __name__ == "__main__":
     app.run(debug=True)
