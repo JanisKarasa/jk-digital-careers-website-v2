@@ -183,7 +183,7 @@ def update_job_posting(id):
         flash('Job posting was updated successfully!', 'success')
         return redirect(url_for('admin'))
     flash('Something went wrong, please try again', 'danger')
-    return redirect(update_job)
+    return redirect(url_for('update_job'))
 
 # A route that handles a job posting SUSPENSION 
 @app.route("/admin/suspend/job/<id>")
@@ -199,9 +199,9 @@ def add_dummy_jobs():
     if len(current_amount_of_jobs) < 14:
         add_dummy_jobs_to_db()
         flash('Dummy Job Data was injected successfully!', 'success')
-        return redirect(admin)
+        return redirect(url_for('admin'))
     flash('Let\'s not Litter our database with too many records, please delete some and try again', 'danger')
-    return redirect(admin)
+    return redirect(url_for('admin'))
 
 if __name__ == "__main__":
     app.run(debug=True)
