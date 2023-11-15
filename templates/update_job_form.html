@@ -48,6 +48,8 @@ block content %}
         id="job_salary"
         name="job_salary"
         value="{{ job.salary }}"
+        min="0"
+        oninput="validity.valid||(value='')"
       />
     </div>
 
